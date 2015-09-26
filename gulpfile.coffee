@@ -32,10 +32,13 @@ gulp.task "build:coffee", ->
 #    sortOutput: true
 #  .pipe gulp.dest("lib")
 
+watching = false
+gulp.task "enable-watch-mode", -> watching = true
+
 gulp.task "build:browserify", ["build:pre"], watchify (watchify)->
   gulp.src "./lib/app.js"
   .pipe watchify
-    watch: true
+    watch: watching
   .pipe gulp.dest "public/js"
 
 gulp.task "build:slim", ->
@@ -60,7 +63,7 @@ gulp.task "connect", ->
     port: 80
     livereload: true
 
-gulp.task "watch", ["build", "connect"], ->
+gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
   gulp.watch "./src/js/**/*.coffee", ["build:coffee"]
   #  gulp.watch "./src/js/**/*.ts",      ["build:ts"]
   gulp.watch "./src/html/**/*.slim",    ["build:slim"]

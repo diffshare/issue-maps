@@ -1,78 +1,76 @@
 gulp = require "gulp"
 $ = require("gulp-load-plugins")()
-mainBowerFiles = require "main-bower-files"
-source = require "vinyl-source-stream"
-browserify = require "browserify"
+del = require "del"
 fs = require "fs"
-aws = JSON.parse fs.readFileSync("aws.json")
 
-files =
-  slim: "src/**/*.slim"
-  coffee: "src/**/*.coffee"
-  sass: "src/**/*.sass"
-  #bower: "bower_components/**/*"
-  bower: [
-    "./bower_components/moment/locale/ja.js",
-    "./bower_components/angular-scroll/angular-scroll.js"
-  ]
+#browserify = require "browserify"
+#watchify = require "watchify"
+watchify = require "gulp-watchify"
+source = require "vinyl-source-stream"
 
-gulp.task "slim", ->
-  gulp.src files.slim
-  .pipe $.slim
-    pretty: true
-  .pipe gulp.dest "bin"
-  .pipe $.connect.reload()
+gulp.task "build", [
+  "build:browserify"
+  "build:slim"
+  "build:sass"
+  "build:static"
+]
+gulp.task "build:pre", [
+  "build:coffee"
+  #"build:ts"
+]
 
-gulp.task "coffee", ->
-  browserify
-    entries: ["./src/app.coffee"]
-    extensions: [".coffee", ".js"]
-    debug: true
-  .transform "coffeeify"
-  .bundle()
-  .pipe source "app.js"
-  .pipe gulp.dest "bin/js"
-  ###
-  gulp.src files.coffee
+gulp.task "build:coffee", ->
+  gulp.src "src/js/**/*.coffee"
   .pipe $.coffee()
-  .pipe gulp.dest "bin/js"
-  .pipe $.connect.reload()
-  ###
+  .pipe gulp.dest("lib")
 
-gulp.task "vendor", ->
-  gulp.src mainBowerFiles().concat files.bower
-  .pipe $.concat("vendor.js")
-  .pipe gulp.dest "bin/js"
+#gulp.task "build:ts", ->
+#  gulp.src "src/js/**/*.ts"
+#  .pipe $.typescript
+#    target:"ES5"
+#    module:"commonjs"
+#    sortOutput: true
+#  .pipe gulp.dest("lib")
 
-  gulp.src ["bower_components/onsenui/build/css/**"]
-  .pipe gulp.dest "bin/css"
+gulp.task "build:browserify", ["build:pre"], watchify (watchify)->
+  gulp.src "./lib/app.js"
+  .pipe watchify
+    watch: true
+  .pipe gulp.dest "public/js"
 
-gulp.task "sass", ->
-  gulp.src files.sass
+gulp.task "build:slim", ->
+  gulp.src "src/html/**/*.slim"
+  .pipe $.slim()
+  .pipe gulp.dest("public")
+
+gulp.task "build:sass", ->
+  gulp.src "src/css/**/*.sass"
   .pipe $.rubySass()
-  .pipe gulp.dest "bin/css"
-  .pipe $.connect.reload()
+  .pipe gulp.dest("public/css")
 
-gulp.task "bower", ->
-  gulp.src files.bower
-  .pipe gulp.dest "bin/bower_components"
-
-gulp.task "s3", ["build"], ->
-  gulp.src "bin/**"
-  .pipe $.s3(aws)
-
-gulp.task "build", ["slim", "coffee", "sass", "vendor"]
-
-gulp.task "watch", ["build"], ->
-  gulp.watch files.slim, ["slim"]
-  gulp.watch files.coffee, ["coffee"]
-  gulp.watch files.sass, ["sass"]
+gulp.task "build:static", ->
+  gulp.src "bower_components/**/*"
+  .pipe gulp.dest "public/bower_components"
 
 gulp.task "connect", ->
-  $.connect.server(
-    root: "bin"
-    port: 8000
+  console.log $.connect
+  $.connect.server
+    root: "public"
+    host: "0.0.0.0"
+    port: 80
     livereload: true
-  )
 
-gulp.task "default", ["watch", "connect"]
+gulp.task "watch", ["build", "connect"], ->
+  gulp.watch "./src/js/**/*.coffee", ["build:coffee"]
+  #  gulp.watch "./src/js/**/*.ts",      ["build:ts"]
+  gulp.watch "./src/html/**/*.slim",    ["build:slim"]
+  gulp.watch "./src/css/**/*.sass",    ["build:sass"]
+
+gulp.task "default", ["build"]
+
+gulp.task "clean", del.bind(null, ["lib/*", "public/*"])
+
+gulp.task "s3", ["build"], ->
+  aws = JSON.parse fs.readFileSync("aws.json")
+  gulp.src "public/**"
+  .pipe $.s3(aws)

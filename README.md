@@ -2,4 +2,4 @@
 issue-maps
 ==========
 
-AngularJS‚ÅGoogle Maps‚ğˆµ‚¤B
+AngularJSã§Google Mapsã‚’æ‰±ã†ã€‚

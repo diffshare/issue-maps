@@ -1,2 +1,6 @@
 div ng-controller="MapController"
   ui-gmap-google-map center='map.center' zoom='map.zoom'
+    ui-gmap-markers models="markers" coords="'self'" labelContent="'title'"
+      ui-gmap-windows show="'showWindow'"
+        div ng-non-bindable=""
+          | {{title}}

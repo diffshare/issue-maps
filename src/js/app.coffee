@@ -1,4 +1,4 @@
-module = angular.module "issueMaps", ["ui.router"]
+module = angular.module "issueMaps", ["ui.router", "uiGmapgoogle-maps"]
 
 module.config ($stateProvider, $urlRouterProvider)->
 
@@ -9,3 +9,4 @@ module.config ($stateProvider, $urlRouterProvider)->
     url: "/"
     templateUrl: "templates/_home.html"
 
+module.controller "MapController", require "./controllers/map_controller"

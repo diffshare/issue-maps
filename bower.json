@@ -12,7 +12,9 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "angular-ui-router": "~0.2.13"
+  "dependencies": {},
+  "devDependencies": {
+    "angular-google-maps": "~2.2.1",
+    "angular-ui-router": "~0.2.15"
   }
 }

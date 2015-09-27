@@ -5,6 +5,10 @@
       p
         | キーワード
         input type="text" ng-model="query"
+        a.category href="" ng-repeat="(category, value) in categories" ng-click="clickCategory(category)"
+          | {{category}}({{value}})
+        a.category href="" ng-click="clickCategory('')"
+          | クリア
       p
         |順番
         select ng-model="selectedIssuesOrder" ng-options="order for order in issuesOrders"

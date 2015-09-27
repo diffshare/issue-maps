@@ -4,6 +4,7 @@ module.exports = class MapController
     @$scope.issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"]
     @$scope.selectedIssuesOrder = "id"
     @$scope.query = ""
+    @$scope.categories = {}
 
     @$scope.$watch "query", ->
       filterMarkers()
@@ -29,6 +30,9 @@ module.exports = class MapController
         latitude: target.latitude
         longitude: target.longitude
 
+    @$scope.clickCategory = (category) =>
+      @$scope.query = category
+
     closeAll = =>
       for m in @$scope.markers
         m.show = false
@@ -41,10 +45,15 @@ module.exports = class MapController
       @Issue.checkKey()
       .then @Issue.fetchIssues
       .then (result)=>
+        @$scope.categories = {}
         for i in result.data.issues
           for c in i.custom_fields
             if c.name == "場所"
               [i.latitude, i.longitude] = c.value.split(",")
+          if i.category
+            @$scope.categories[i.category.name] ||= 0
+            @$scope.categories[i.category.name] += 1
+
           @$scope.markers.push
             id: i.id
             latitude: i.latitude

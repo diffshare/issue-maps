@@ -1,6 +1,19 @@
-div ng-controller="MapController"
-  ui-gmap-google-map center='map.center' zoom='map.zoom'
-    ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"
-      ui-gmap-windows show="'showWindow'"
-        div ng-non-bindable=""
-          | {{title}}
+.home ng-controller="MapController"
+  .left
+    .content
+      h1 一覧
+      .issues
+        .issue ng-repeat="i in markers" ng-click="clickIssue(i)"
+          .issue-title
+            | {{i.title}}
+          .issue-description
+            | {{i.description}}
+  .right
+    ui-gmap-google-map center='map.center' zoom='map.zoom'
+      ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"
+        ui-gmap-windows show="'showWindow'"
+          div ng-non-bindable=""
+            .title
+              | {{title}}
+            .description
+              | {{description}}

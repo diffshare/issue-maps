@@ -1,5 +1,31 @@
 body
-  background-color: #eeeeee
+  background-color: white
+  margin: 0
+
+$left-width: 30%
+
+.home
+.left, .right
+  position: absolute
+.left
+  width: $left-width
+.right
+  right: 0
+  width: 100% - $left-width
+.content
+
+.issues
+.issue
+  overflow: hidden
+  padding: 5px 10px
+  &:hover
+    background-color: #eeeeee
+    cursor: pointer
+.issue-title
+  margin: 5px 0
+.issue-description
+  color: gray
+  font-size: 90%
 
 .angular-google-map-container
   height: 800px

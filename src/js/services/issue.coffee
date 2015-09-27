@@ -1,12 +1,27 @@
-module.exports = ($http, $window, Setting)->
+module.exports = ($http, $window, $q, Setting)->
   new class
 
-    constructor: ->
+    checkKey: ->
+      key = $window.localStorage.getItem "redmine-access-key"
+      deferred = $q.defer()
+      if Setting.backend.issue.type != "redmine"
+        deferred.resolve true
+      else
+        if key == null
+          key = $window.prompt "Redmine Access Keyを入力してください"
 
-    fetchIssues: ->
+        if key and key.length > 0
+          $window.localStorage.setItem "redmine-access-key", key
+          deferred.resolve key
+        else
+          deferred.reject("Issueの表示にはRedmine Access Keyが必要です")
 
+      deferred.promise
+
+    fetchIssues: (key)->
       url = Setting.backend.issue.url
-      if Setting.backend.issue.type == "jsonp"
+      if Setting.backend.issue.type == "redmine"
+
         # redmineがjsonpのcallback文字列からdotを消してしまう件について
         c = $window.angular.callbacks.counter.toString(36);
         $window['angularcallbacks_' + c] = (data)->
@@ -17,7 +32,7 @@ module.exports = ($http, $window, Setting)->
         # 本来はここでredmineのissuesにアクセス
         url =
 
-        $http.jsonp url
+          $http.jsonp url + "&key=" + key
       else if Setting.backend.issue.type == "json"
         $http.get url
       else

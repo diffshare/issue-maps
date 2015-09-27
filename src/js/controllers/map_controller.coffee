@@ -25,7 +25,9 @@ module.exports = class MapController
         m.show = false
 
     # redmine方式のissue読み込み
-    @Issue.fetchIssues().then (result)=>
+    @Issue.checkKey()
+    .then @Issue.fetchIssues
+    .then (result)=>
 
       for i in result.data.issues
         for c in i.custom_fields
@@ -40,3 +42,5 @@ module.exports = class MapController
           start_date: i.start_date
           created_on: i.created_on
           icon: "//www.google.co.jp/maps/vt/icon/name=assets/icons/poi/quantum/star_shadow-1-small.png,assets/icons/poi/quantum/star_container-1-small.png,assets/icons/poi/quantum/star-1-small.png&highlight=ff000000,cd814b,ffed47&color=ff000000?scale=1"
+    .catch (error)=>
+      alert error

@@ -24,7 +24,7 @@
             | {{i.author}}
   .right
     ui-gmap-google-map center='map.center' zoom='map.zoom'
-      ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"
+      ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'" events="markersEvents"
         ui-gmap-windows show="'showWindow'"
           .window ng-non-bindable=""
             .issue-title

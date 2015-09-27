@@ -13,6 +13,11 @@ module.exports = class MapController
 
     @$scope.markers = []
 
+    @$scope.markersEvents =
+      click: (marker, eventName, model, args)->
+        closeAll()
+        model.show = true
+
     @$scope.clickIssue = (target)=>
       closeAll()
       target.show = true

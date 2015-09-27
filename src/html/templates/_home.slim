@@ -22,8 +22,8 @@
     ui-gmap-google-map center='map.center' zoom='map.zoom'
       ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"
         ui-gmap-windows show="'showWindow'"
-          div ng-non-bindable=""
-            .title
+          .window ng-non-bindable=""
+            .issue-title
               | {{title}}
-            .description
+            .issue-description
               | {{description}}

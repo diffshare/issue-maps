@@ -18,6 +18,18 @@ module.exports = ($http, $window, $q, Setting)->
 
       deferred.promise
 
+    inputKey: ->
+      deferred = $q.defer()
+      key = $window.prompt "Redmine Access Keyを入力してください"
+
+      if key and key.length > 0
+        $window.localStorage.setItem "redmine-access-key", key
+        deferred.resolve key
+      else
+        deferred.reject("Issueの表示にはRedmine Access Keyが必要です")
+
+      deferred.promise
+
     fetchIssues: (key)->
       url = Setting.backend.issue.url
       if Setting.backend.issue.type == "redmine"

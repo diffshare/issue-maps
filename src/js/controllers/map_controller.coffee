@@ -15,14 +15,14 @@ module.exports = class MapController
 
     @$scope.clickIssue = (target)=>
       closeAll()
-      target.showWindow = true
+      target.show = true
       @$scope.map.center =
         latitude: target.latitude
         longitude: target.longitude
 
     closeAll = =>
       for m in @$scope.markers
-        m.showWindow = false
+        m.show = false
 
     # redmine方式のissue読み込み
     @Issue.fetchIssues().then (result)=>

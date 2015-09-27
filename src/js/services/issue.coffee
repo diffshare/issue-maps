@@ -1,6 +1,13 @@
 module.exports = ($http, $window, $q, Setting)->
   new class
 
+    # hasAccessKey().then (result)->
+    #   if result == true
+    #     次の処理
+    #   else
+    #     requestAccessKey()
+    # のような形の方が良いかね
+
     checkKey: ->
       key = $window.localStorage.getItem "redmine-access-key"
       deferred = $q.defer()
@@ -43,7 +50,6 @@ module.exports = ($http, $window, $q, Setting)->
 
         # 本来はここでredmineのissuesにアクセス
         url =
-
           $http.jsonp url + "&key=" + key
       else if Setting.backend.issues.type == "json"
         $http.get url

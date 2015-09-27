@@ -9,4 +9,5 @@ module.config ($stateProvider, $urlRouterProvider)->
     url: "/"
     templateUrl: "templates/_home.html"
 
+module.factory "Issue", require "./services/issue"
 module.controller "MapController", require "./controllers/map_controller"

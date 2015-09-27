@@ -13,6 +13,7 @@ gulp.task "build", [
   "build:slim"
   "build:sass"
   "build:static"
+  "build:bower"
 ]
 gulp.task "build:pre", [
   "build:coffee"
@@ -51,9 +52,14 @@ gulp.task "build:sass", ->
   .pipe $.rubySass()
   .pipe gulp.dest("public/css")
 
-gulp.task "build:static", ->
+gulp.task "build:bower", ->
   gulp.src "bower_components/**/*"
   .pipe gulp.dest "public/bower_components"
+
+gulp.task "build:static", ->
+  gulp.src "src/assets/**/*"
+  .pipe gulp.dest "public/assets"
+
 
 gulp.task "connect", ->
   console.log $.connect

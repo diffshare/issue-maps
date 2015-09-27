@@ -9,6 +9,9 @@
         .issue ng-repeat="i in markers | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
           .issue-title
             | {{i.title}}
+            | &nbsp;
+            a ui-sref="issue({id: i.id})"
+              | 詳細
           .issue-description
             | {{i.description}}
           /.issue-gps

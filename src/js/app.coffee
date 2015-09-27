@@ -11,6 +11,9 @@ module.config ($stateProvider, $urlRouterProvider)->
   .state "home",
     url: "/"
     templateUrl: "templates/_home.html"
+  .state "issue",
+    url: "/issues/:id"
+    templateUrl: "templates/_issues_show.html"
 
 module.constant "Setting", require "./setting" # setting.sampleを動かす場合は"./setting.sample"と書く
 module.factory "Issue", require "./services/issue"

@@ -1,4 +1,7 @@
-module = angular.module "issueMaps", ["ui.router", "uiGmapgoogle-maps"]
+module = angular.module "issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment"]
+
+module.run (amMoment)->
+  amMoment.changeLocale "ja"
 
 module.config ($stateProvider, $urlRouterProvider)->
 

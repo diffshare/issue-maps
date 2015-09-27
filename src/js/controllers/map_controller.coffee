@@ -1,8 +1,12 @@
 module.exports = class MapController
 
-  constructor: (@$scope, @Issue)->
+  constructor: (@$scope, @$filter, @Issue)->
     @$scope.issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"]
     @$scope.selectedIssuesOrder = "id"
+    @$scope.query = ""
+
+    @$scope.$watch "query", ->
+      filterMarkers()
 
     @$scope.map =
       center:
@@ -11,6 +15,7 @@ module.exports = class MapController
       zoom: 12
 
     @$scope.markers = []
+    @$scope.filteredMarkers = []
 
     @$scope.markersEvents =
       click: (marker, eventName, model, args)->
@@ -27,6 +32,9 @@ module.exports = class MapController
     closeAll = =>
       for m in @$scope.markers
         m.show = false
+
+    filterMarkers = =>
+      @$scope.filteredMarkers = @$filter("filter")(@$scope.markers, @$scope.query)
 
     # redmine方式のissue読み込み
     loading = =>
@@ -46,6 +54,7 @@ module.exports = class MapController
             author: i.author.name
             start_date: i.start_date
             created_on: i.created_on
+          filterMarkers()
       .catch (error)=>
         if error.status && error.status == 404 # なぜ401ではない？
           alert "Redmine Access Keyが異なる可能性があります"

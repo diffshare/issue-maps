@@ -3,10 +3,13 @@
     .content
       h1 一覧
       p
+        | キーワード
+        input type="text" ng-model="query"
+      p
         |順番
         select ng-model="selectedIssuesOrder" ng-options="order for order in issuesOrders"
       .issues
-        .issue ng-repeat="i in markers | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
+        .issue ng-repeat="i in filteredMarkers | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
           .issue-title
             | {{i.title}}
             | &nbsp;
@@ -24,7 +27,7 @@
             | {{i.author}}
   .right
     ui-gmap-google-map center='map.center' zoom='map.zoom'
-      ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'" events="markersEvents"
+      ui-gmap-markers models="filteredMarkers" coords="'self'" labelContent="'title'" icon="'icon'" events="markersEvents"
         ui-gmap-windows show="'showWindow'"
           .window ng-non-bindable=""
             .issue-title

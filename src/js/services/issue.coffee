@@ -1,4 +1,12 @@
 module.exports = ($http, $window, $q, Setting)->
+
+  createRedmineCallback = ->
+    # redmineがjsonpのcallback文字列からdotを消してしまう件について
+    c = $window.angular.callbacks.counter.toString(36);
+    $window['angularcallbacks_' + c] = (data)->
+      $window.angular.callbacks['_' + c](data)
+      delete $window['angularcallbacks_' + c]
+
   new class
 
     # hasAccessKey().then (result)->
@@ -27,7 +35,9 @@ module.exports = ($http, $window, $q, Setting)->
 
     inputKey: ->
       deferred = $q.defer()
-      key = $window.prompt "Redmine Access Keyを入力してください"
+      key = $window.prompt "Redmine Access Keyを入力してください。" +
+          "入力完了後に再度、認証画面が表示された場合はAccessKeyが正しくないので認証をキャンセルし、" +
+          "もう一度Keyを入力してください。"
 
       if key and key.length > 0
         $window.localStorage.setItem "redmine-access-key", key
@@ -41,12 +51,7 @@ module.exports = ($http, $window, $q, Setting)->
       url = Setting.backend.issues.url
       if Setting.backend.issues.type == "redmine"
 
-        # redmineがjsonpのcallback文字列からdotを消してしまう件について
-        c = $window.angular.callbacks.counter.toString(36);
-        $window['angularcallbacks_' + c] = (data)->
-          $window.angular.callbacks['_' + c](data)
-          delete $window['angularcallbacks_' + c]
-        # ここまで対処
+        createRedmineCallback()
 
         $http.jsonp url + "&key=" + key
       else if Setting.backend.issues.type == "json"
@@ -58,15 +63,11 @@ module.exports = ($http, $window, $q, Setting)->
       url = Setting.backend.issue.url
       if Setting.backend.issue.type == "redmine"
 
-        # redmineがjsonpのcallback文字列からdotを消してしまう件について
-        c = $window.angular.callbacks.counter.toString(36);
-        $window['angularcallbacks_' + c] = (data)->
-          $window.angular.callbacks['_' + c](data)
-          delete $window['angularcallbacks_' + c]
-        # ここまで対処
+        createRedmineCallback()
 
         $http.jsonp (url + "&key=" + key).replace(":id", id)
       else if Setting.backend.issue.type == "json"
         $http.get url
       else
         throw new Error("知らんがな backend.issue.type:" + Setting.backend.issue.type)
+

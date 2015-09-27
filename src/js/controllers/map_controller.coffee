@@ -2,7 +2,7 @@ module.exports = class MapController
 
   constructor: (@$scope, @Issue)->
 
-    @$scope.issuesOrders = ["id", "title", "latitude", "longitude"]
+    @$scope.issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"]
     @$scope.selectedIssuesOrder = "id"
 
     @$scope.map =

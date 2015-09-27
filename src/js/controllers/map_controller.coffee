@@ -54,6 +54,7 @@ module.exports = class MapController
             author: i.author.name
             start_date: i.start_date
             created_on: i.created_on
+            category: i.category && i.category.name
           filterMarkers()
       .catch (error)=>
         if error.status && error.status == 404 # なぜ401ではない？

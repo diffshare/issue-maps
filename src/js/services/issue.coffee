@@ -48,9 +48,7 @@ module.exports = ($http, $window, $q, Setting)->
           delete $window['angularcallbacks_' + c]
         # ここまで対処
 
-        # 本来はここでredmineのissuesにアクセス
-        url =
-          $http.jsonp url + "&key=" + key
+        $http.jsonp url + "&key=" + key
       else if Setting.backend.issues.type == "json"
         $http.get url
       else
@@ -67,10 +65,7 @@ module.exports = ($http, $window, $q, Setting)->
           delete $window['angularcallbacks_' + c]
         # ここまで対処
 
-        # 本来はここでredmineのissuesにアクセス
-        url =
-
-          $http.jsonp (url + "&key=" + key).replace(":id", id)
+        $http.jsonp (url + "&key=" + key).replace(":id", id)
       else if Setting.backend.issue.type == "json"
         $http.get url
       else

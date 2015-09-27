@@ -2,6 +2,9 @@ module.exports = class MapController
 
   constructor: (@$scope, @Issue)->
 
+    @$scope.issuesOrders = ["id", "title", "latitude", "longitude"]
+    @$scope.selectedIssuesOrder = "id"
+
     @$scope.map =
       center:
         latitude: 35.68519569653298

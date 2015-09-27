@@ -2,12 +2,17 @@
   .left
     .content
       h1 一覧
+      p
+        |順番
+        select ng-model="selectedIssuesOrder" ng-options="order for order in issuesOrders"
       .issues
-        .issue ng-repeat="i in markers" ng-click="clickIssue(i)"
+        .issue ng-repeat="i in markers | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
           .issue-title
             | {{i.title}}
           .issue-description
             | {{i.description}}
+          .issue-gps
+            | {{i.latitude}}, {{i.longitude}}
   .right
     ui-gmap-google-map center='map.center' zoom='map.zoom'
       ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"

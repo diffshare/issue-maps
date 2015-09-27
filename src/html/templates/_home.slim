@@ -1,7 +1,6 @@
 .home ng-controller="MapController"
   .left
     .content
-      h1 一覧
       p
         | キーワード
         input type="text" ng-model="query"
@@ -12,6 +11,8 @@
       p
         |順番
         select ng-model="selectedIssuesOrder" ng-options="order for order in issuesOrders"
+      p
+        | 検索結果 {{filteredMarkers.length}}件
       .issues
         .issue ng-repeat="i in filteredMarkers | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
           .issue-title

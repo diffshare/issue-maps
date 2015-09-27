@@ -31,6 +31,26 @@ module.exports = ($http, $window, $q, Setting)->
       deferred.promise
 
     fetchIssues: (key)->
+      url = Setting.backend.issues.url
+      if Setting.backend.issues.type == "redmine"
+
+        # redmineがjsonpのcallback文字列からdotを消してしまう件について
+        c = $window.angular.callbacks.counter.toString(36);
+        $window['angularcallbacks_' + c] = (data)->
+          $window.angular.callbacks['_' + c](data)
+          delete $window['angularcallbacks_' + c]
+        # ここまで対処
+
+        # 本来はここでredmineのissuesにアクセス
+        url =
+
+          $http.jsonp url + "&key=" + key
+      else if Setting.backend.issues.type == "json"
+        $http.get url
+      else
+        throw new Error("知らんがな backend.issues.type:" + Setting.backend.issues.type)
+
+    fetchIssue: (key, id)->
       url = Setting.backend.issue.url
       if Setting.backend.issue.type == "redmine"
 
@@ -44,7 +64,7 @@ module.exports = ($http, $window, $q, Setting)->
         # 本来はここでredmineのissuesにアクセス
         url =
 
-          $http.jsonp url + "&key=" + key
+          $http.jsonp (url + "&key=" + key).replace(":id", id)
       else if Setting.backend.issue.type == "json"
         $http.get url
       else

@@ -1,5 +1,5 @@
 module.exports =
   backend:
-    issue:
+    issues:
       type: "json"
       url: "/assets/issues.json"

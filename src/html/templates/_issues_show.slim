@@ -1,1 +1,10 @@
-p 個別
+a ui-sref="home" ホーム
+.issue-page ng-controller="IssueController"
+  h1
+    | {{issue.subject}}
+  p
+    | {{issue.author.name}}
+  p
+    | {{issue.description}}
+  p
+    | {{issue.status.name}}

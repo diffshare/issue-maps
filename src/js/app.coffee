@@ -18,3 +18,4 @@ module.config ($stateProvider, $urlRouterProvider)->
 module.constant "Setting", require "./setting" # setting.sampleを動かす場合は"./setting.sample"と書く
 module.factory "Issue", require "./services/issue"
 module.controller "MapController", require "./controllers/map_controller"
+module.controller "IssueController", require "./controllers/issue_controller"

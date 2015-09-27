@@ -11,13 +11,14 @@
             | {{i.title}}
           .issue-description
             | {{i.description}}
-          .issue-gps
+          /.issue-gps
             | {{i.latitude}}, {{i.longitude}}
           .issue-start-date ng-show="i.start_date"
             | 開始日: {{i.start_date | amCalendar}}({{i.start_date | amTimeAgo}})
           .issue-created-on ng-show="i.created_on"
             | 登録日時: {{i.created_on | amTimeAgo}}
-
+          .issue-author
+            | {{i.author}}
   .right
     ui-gmap-google-map center='map.center' zoom='map.zoom'
       ui-gmap-markers models="markers" coords="'self'" labelContent="'title'" icon="'icon'"

@@ -3,3 +3,6 @@ module.exports =
     issues:
       type: "json"
       url: "/assets/issues.json"
+    issue:
+      type: "json"
+      url: "/assets/issues/:id.json"

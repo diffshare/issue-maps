@@ -3,6 +3,11 @@ body
   margin: 0
 h1, p
   padding: 0 10px
+a, a:visited
+  color: #1A1AD4
+  text-decoration: none
+  &:hover
+    text-decoration: underline
 
 $left-width: 30%
 
@@ -29,12 +34,27 @@ $left-width: 30%
   -webkit-overflow-scrolling: touch
 
 .issues
+  border-top: 1px dashed #f0f0f0
 .issue
+  position: relative
+  border-bottom: 1px dashed #f0f0f0
   overflow: hidden
   padding: 5px 10px
+  a.edit
+    color: lighten(#1A1AD4, 30%)
+    text-decoration: none
   &:hover
     background-color: #eeeeee
     cursor: pointer
+    a.edit
+      color: lighten(#1A1AD4, 0%)
+      &:hover
+        text-decoration: underline
+
+.issue-control
+  position: absolute
+  top: 10px
+  right: 10px
 .issue-title
   margin: 5px 0
 .issue-description

@@ -20,7 +20,8 @@
           .issue-title
             | {{i.title}}
             | &nbsp;
-            a ui-sref="issue({id: i.id})"
+          .issue-control
+            a.edit ui-sref="issue({id: i.id})"
               | 詳細
           .issue-description
             | {{i.description}}

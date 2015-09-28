@@ -1,4 +1,4 @@
-module = angular.module "issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment"]
+module = angular.module "issueMaps", ["ngTouch", "ui.router", "uiGmapgoogle-maps", "angularMoment"]
 
 module.run (amMoment)->
   amMoment.changeLocale "ja"

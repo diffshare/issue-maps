@@ -16,8 +16,8 @@ gulp.task "build", [
   "build:bower"
 ]
 gulp.task "build:pre", [
-  "build:coffee"
-  #"build:ts"
+  #"build:coffee"
+  "build:ts"
 ]
 
 gulp.task "build:coffee", ->
@@ -25,19 +25,19 @@ gulp.task "build:coffee", ->
   .pipe $.coffee()
   .pipe gulp.dest("lib")
 
-#gulp.task "build:ts", ->
-#  gulp.src "src/js/**/*.ts"
-#  .pipe $.typescript
-#    target:"ES5"
-#    module:"commonjs"
-#    sortOutput: true
-#  .pipe gulp.dest("lib")
+gulp.task "build:ts", ->
+  gulp.src "src/js/**/*.ts"
+  .pipe $.typescript
+    target:"es6"
+    module:"commonjs"
+    sortOutput: true
+  .pipe gulp.dest("lib")
 
 watching = false
 gulp.task "enable-watch-mode", -> watching = true
 
 gulp.task "build:browserify", ["build:pre"], watchify (watchify)->
-  gulp.src "./lib/app.js"
+  gulp.src "./lib/Application.js"
   .pipe watchify
     watch: watching
   .pipe gulp.dest "public/js"
@@ -70,8 +70,8 @@ gulp.task "connect", ->
     livereload: true
 
 gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
-  gulp.watch "./src/js/**/*.coffee", ["build:coffee"]
-  #  gulp.watch "./src/js/**/*.ts",      ["build:ts"]
+  #gulp.watch "./src/js/**/*.coffee", ["build:coffee"]
+  gulp.watch "./src/js/**/*.ts",      ["build:ts"]
   gulp.watch "./src/html/**/*.slim",    ["build:slim"]
   gulp.watch "./src/css/**/*.sass",    ["build:sass"]
 

@@ -23,7 +23,7 @@ class RootController {
     updateIssues() {
         this.IssueAPI.fetchIssues().then((result) => {
             this.issues = result.data.issues.map((issue:any) => {
-                for (var c in issue.custom_fields) {
+                for (var c of issue.custom_fields) {
                     if (c.name == "場所")
                         [issue.latitude, issue.longitude] = c.value.split(",");
                 }

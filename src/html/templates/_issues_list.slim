@@ -8,13 +8,13 @@
       | クリア
   p
     |順番
-    select ng-model="selectedIssuesOrder" ng-options="order for order in issuesOrders"
+    select ng-model="ctrl.selectedIssuesOrder" ng-options="order for order in ctrl.issuesOrders"
   p
     | 検索結果 {{filteredMarkers.length}}件
   .issues
     / 検索結果が100件を超えるとDOMの生成コストが大きくて、スマートデバイスでの動作が遅くなる
     / そのときにはlimitTo: 100を入れたり、DOM生成コストを小さくする工夫が必要、と書いておく
-    .issue ng-repeat="i in ctrl.filteredIssues | orderBy:selectedIssuesOrder" ng-click="clickIssue(i)"
+    .issue ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="clickIssue(i)"
       .issue-title
         | {{i.title}}
         | &nbsp;

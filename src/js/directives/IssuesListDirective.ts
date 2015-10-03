@@ -18,6 +18,8 @@ class IssuesListController {
     query:string = "";
     filteredIssues:Array<any>;
     categories:Object;
+    issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"];
+    selectedIssuesOrder = "id";
 
     constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());

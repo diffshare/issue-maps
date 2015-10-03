@@ -27,9 +27,14 @@ class IssuesListController {
     updateFilteredIssues() {
         this.categories = {};
         this.issues.forEach((issue)=> {
+            if (!issue.category) return;
             this.categories[issue.category] = this.categories[issue.category] || 0;
             this.categories[issue.category] += 1;
         });
         this.filteredIssues = this.$filter("filter")(this.issues, this.query);
+    }
+
+    clickCategory(category) {
+        this.query = category;
     }
 }

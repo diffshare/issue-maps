@@ -4,7 +4,7 @@
     input type="text" ng-model="ctrl.query"
     a.category href="" ng-repeat="(category, value) in ctrl.categories" ng-click="ctrl.clickCategory(category)"
       | {{category}}({{value}})
-    a.category href="" ng-click="clickCategory('')"
+    a.category href="" ng-click="ctrl.clickCategory('')"
       | クリア
   p
     |順番

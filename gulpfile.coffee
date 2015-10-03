@@ -28,9 +28,12 @@ gulp.task "build:coffee", ->
 gulp.task "build:ts", ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
-    target:"es5"
+    target:"es6"
     module:"commonjs"
     sortOutput: true
+    experimentalAsyncFunctions: true
+  .pipe $.babel
+    optional: ["runtime"]
   .pipe gulp.dest("lib")
 
 watching = false

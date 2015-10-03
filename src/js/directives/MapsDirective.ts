@@ -4,7 +4,8 @@ export default class MapsDirective implements ng.IDirective {
 
     restrict:string = "E";
     scope:Object = {
-        issues: "=issues"
+        issues: "=issues",
+        selectedIssue: "=selectedIssue"
     };
     bindToController:Boolean = true;
     controller = MapsController;
@@ -14,7 +15,7 @@ export default class MapsDirective implements ng.IDirective {
 
 class MapsController {
 
-    map:Object = {
+    map:any = {
         center: {
             latitude: 35.68519569653298,
             longitude: 139.75278877116398
@@ -23,7 +24,15 @@ class MapsController {
     };
 
     issues:Array<any>;
+    selectedIssue:any;
 
-    constructor() {
+    constructor(private $scope:ng.IScope) {
+        $scope.$watch(() => this.selectedIssue, (issue)=> this.gotoIssue(issue));
+    }
+
+    gotoIssue(issue) {
+        if (!issue) return;
+        this.map.center.latitude = issue.latitude;
+        this.map.center.longitude = issue.longitude;
     }
 }

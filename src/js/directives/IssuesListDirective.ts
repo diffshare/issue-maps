@@ -4,7 +4,9 @@ export default class IssuesListDirective implements ng.IDirective {
 
     restrict:string = "E";
     scope:Object = {
-        issues: "=issues"
+        issues: "=issues",
+        filteredIssues: "=filteredIssues",
+        selectedIssue: "=selectedIssue"
     };
     bindToController:Boolean = true;
     controller = IssuesListController;
@@ -20,6 +22,7 @@ class IssuesListController {
     categories:Object;
     issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"];
     selectedIssuesOrder = "id";
+    selectedIssue = null;
 
     constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
@@ -38,5 +41,17 @@ class IssuesListController {
 
     clickCategory(category) {
         this.query = category;
+    }
+
+    clickIssue(issue) {
+        //console.log("clickIssue");
+        this.closeAll();
+        this.selectedIssue = issue;
+    }
+
+    closeAll() {
+        this.issues.forEach((issue)=> {
+            issue.show = false;
+        });
     }
 }

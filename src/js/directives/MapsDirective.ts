@@ -26,6 +26,15 @@ class MapsController {
     issues:Array<any>;
     selectedIssue:any;
 
+    markersEvents = {
+        click: (marker, eventName, model, args)=> {
+            this.issues.forEach((issue)=> {
+                issue.show = false;
+            });
+            model.show = true
+        }
+    };
+
     constructor(private $scope:ng.IScope) {
         $scope.$watch(() => this.selectedIssue, (issue)=> this.gotoIssue(issue));
     }

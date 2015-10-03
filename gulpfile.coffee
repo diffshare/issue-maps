@@ -28,7 +28,7 @@ gulp.task "build:coffee", ->
 gulp.task "build:ts", ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
-    target:"es6"
+    target:"es5"
     module:"commonjs"
     sortOutput: true
   .pipe gulp.dest("lib")

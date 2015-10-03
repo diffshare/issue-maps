@@ -1,0 +1,8 @@
+ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'
+  ui-gmap-markers models="ctrl.issues" coords="'self'" labelContent="'title'" icon="'icon'" events="markersEvents"
+    ui-gmap-windows show="'showWindow'"
+      .window ng-non-bindable=""
+        .issue-title
+          | {{title}}
+        .issue-description
+          | {{description}}

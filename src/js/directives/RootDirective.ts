@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
-import IssueAPI from "../api/IssueAPI"
+import IssueAPI from "../services/IssueService"
 
 export default class RootDirective implements ng.IDirective {
 

@@ -28,7 +28,7 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
 import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";
 import IssuesListDirective from "./directives/IssuesListDirective";
-import IssueAPI from "./api/IssueAPI"
+import IssueService from "./services/IssueService"
 
 module.directive("root", ()=> {
     return new RootDirective();
@@ -39,7 +39,7 @@ module.directive("maps", ()=> {
 module.directive("issuesList", ()=> {
     return new IssuesListDirective();
 });
-//module.factory("IssueAPI", ()=> {
-//    return new IssueAPI()
+//module.factory("IssueService", ()=> {
+//    return new IssueService()
 //});
-module.service("IssueAPI", IssueAPI);
+module.service("IssueService", IssueService);

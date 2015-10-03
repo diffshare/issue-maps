@@ -1,4 +1,4 @@
-export default class IssueAPI {
+export default class IssueService {
 
     constructor(public $http:ng.IHttpService) {
 

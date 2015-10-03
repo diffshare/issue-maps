@@ -25,6 +25,7 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
     }
 );
 
+import ENDPOINT from "./Setting"
 import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";
 import IssuesListDirective from "./directives/IssuesListDirective";
@@ -39,7 +40,4 @@ module.directive("maps", ()=> {
 module.directive("issuesList", ()=> {
     return new IssuesListDirective();
 });
-//module.factory("IssueService", ()=> {
-//    return new IssueService()
-//});
 module.service("IssueService", IssueService);

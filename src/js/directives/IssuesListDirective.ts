@@ -20,6 +20,7 @@ class IssuesListController {
 
     constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
+        this.$scope.$watch(()=> this.issues, ()=> this.updateFilteredIssues());
     }
 
     updateFilteredIssues() {

@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
-import IssueAPI from "../services/IssueService"
+import IssueService from "../services/IssueService"
 
 export default class RootDirective implements ng.IDirective {
 
@@ -16,12 +16,17 @@ class RootController {
 
     issues = [];
 
-    constructor(private IssueAPI:IssueAPI) {
+    constructor(private IssueService:IssueService) {
         this.updateIssues();
     }
 
     async updateIssues() {
         // XXX tryによるエラーハンドリング
-        this.issues = await this.IssueAPI.fetchIssues();
+        try {
+            this.issues = await this.IssueService.fetchIssues();
+        } catch (e) {
+            console.error(e.message);
+            this.IssueService.inputRedmineKey();
+        }
     }
 }

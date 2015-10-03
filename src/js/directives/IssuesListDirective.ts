@@ -15,8 +15,14 @@ export default class IssuesListDirective implements ng.IDirective {
 class IssuesListController {
 
     issues:Array<any>;
+    query:string = "";
+    filteredIssues:Array<any>;
 
-    constructor(private $scope:ng.IScope) {
-        console.log(this.issues);
+    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
+        this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
+    }
+
+    updateFilteredIssues() {
+        this.filteredIssues = this.$filter("filter")(this.issues, this.query);
     }
 }

@@ -17,6 +17,6 @@ class IssuesListController {
     issues:Array<any>;
 
     constructor(private $scope:ng.IScope) {
-        console.log(`issues: ${this.issues}`);
+        console.log(this.issues);
     }
 }

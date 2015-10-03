@@ -17,6 +17,7 @@ class IssuesListController {
     issues:Array<any>;
     query:string = "";
     filteredIssues:Array<any>;
+    categories:Object;
 
     constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
@@ -24,6 +25,11 @@ class IssuesListController {
     }
 
     updateFilteredIssues() {
+        this.categories = {};
+        this.issues.forEach((issue)=> {
+            this.categories[issue.category] = this.categories[issue.category] || 0;
+            this.categories[issue.category] += 1;
+        });
         this.filteredIssues = this.$filter("filter")(this.issues, this.query);
     }
 }

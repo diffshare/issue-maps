@@ -2,7 +2,7 @@
   p
     | キーワード
     input type="text" ng-model="ctrl.query"
-    a.category href="" ng-repeat="(category, value) in categories" ng-click="clickCategory(category)"
+    a.category href="" ng-repeat="(category, value) in ctrl.categories" ng-click="ctrl.clickCategory(category)"
       | {{category}}({{value}})
     a.category href="" ng-click="clickCategory('')"
       | クリア

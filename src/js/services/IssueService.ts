@@ -76,7 +76,10 @@ export default class IssueService {
             longitude: issue.longitude,
             title: issue.subject,
             description: issue.description,
-            //author: issue.author.name
+            author: issue.author.name,
+            start_date: issue.start_date,
+            created_on: issue.created_on,
+            category: issue.category && issue.category.name
         };
     }
 }

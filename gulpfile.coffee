@@ -2,6 +2,7 @@ gulp = require "gulp"
 $ = require("gulp-load-plugins")()
 del = require "del"
 fs = require "fs"
+packageJson = require "./package.json"
 
 #browserify = require "browserify"
 #watchify = require "watchify"
@@ -63,7 +64,6 @@ gulp.task "build:static", ->
   gulp.src "src/assets/**/*"
   .pipe gulp.dest "public/assets"
 
-
 gulp.task "connect", ->
   console.log $.connect
   $.connect.server
@@ -71,6 +71,23 @@ gulp.task "connect", ->
     host: "0.0.0.0"
     port: 80
     livereload: true
+
+gulp.task "electron", ->
+  gulp.src ""
+  .pipe $.electron
+    src: "./public"
+    packageJson: packageJson
+    release: "./release"
+    cache: "./cache"
+    version: "v0.33.0"
+    packaging: true
+    platforms: ["win32-ia32"]
+    platformResources:
+      win:
+        "version-string": packageJson.version
+        "file-version": packageJson.version
+        "product-version": packageJson.version
+  .pipe gulp.dest ""
 
 gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
   #gulp.watch "./src/js/**/*.coffee", ["build:coffee"]

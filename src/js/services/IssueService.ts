@@ -71,6 +71,16 @@ export default class IssueService {
         });
     }
 
+    updateRedmineIssue(id:number, issue:any):ng.IPromise<any> {
+        this.createRedmineCallback();
+        let url = ENDPOINT.issue_url
+            .replace(":id", id.toString())
+            .replace(":key", this.getRedmineAccessKey());
+        return this.$http.put(url, {issue: issue}).then((result:any)=> {
+            console.log(result);
+        });
+    }
+
     // 整形は利用するエンドポイントごとに異なるので、APIに押し込む
     static formatIssues(issues:Array<any>) {
         return issues.map(IssueService.formatIssue);

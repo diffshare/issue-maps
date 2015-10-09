@@ -30,7 +30,8 @@ class IssueController {
         this.$scope.$apply();
     }
 
-    clickSubmit() {
+    async clickSubmit() {
+        await this.IssueService.updateRedmineIssue(this.issue.id, this.issue);
         this.$state.go("issue", {id: this.$stateParams["id"]});
     }
 }

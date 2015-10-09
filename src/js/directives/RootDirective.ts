@@ -16,7 +16,7 @@ class RootController {
 
     issues = [];
 
-    constructor(private IssueService:IssueService) {
+    constructor(private $scope:ng.IScope, private IssueService:IssueService) {
         this.updateIssues();
     }
 
@@ -24,9 +24,10 @@ class RootController {
         // XXX tryによるエラーハンドリング
         try {
             this.issues = await this.IssueService.fetchIssues();
+            this.$scope.$apply();
         } catch (e) {
             console.error(e.message);
-            this.IssueService.inputRedmineKey();
+            //this.IssueService.inputRedmineKey();
         }
     }
 }

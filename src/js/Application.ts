@@ -13,7 +13,7 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-            .state("/", {
+            .state("home", {
                 url: "/",
                 templateUrl: "templates/_home.html"
             })
@@ -33,6 +33,7 @@ import ENDPOINT from "./Setting"
 import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";
 import IssuesListDirective from "./directives/IssuesListDirective";
+import IssueDirective from "./directives/IssueDirective";
 import IssueService from "./services/IssueService"
 
 module.directive("root", ()=> {
@@ -43,5 +44,8 @@ module.directive("maps", ()=> {
 });
 module.directive("issuesList", ()=> {
     return new IssuesListDirective();
+});
+module.directive("issue", ()=> {
+    return new IssueDirective();
 });
 module.service("IssueService", IssueService);

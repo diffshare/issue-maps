@@ -39,11 +39,12 @@ export default class IssueService {
     }
 
     fetchRedmineIssues():ng.IPromise<any> {
-        if (!this.isRedmineLoggedIn()) this.inputRedmineKey();
+        //if (!this.isRedmineLoggedIn()) this.inputRedmineKey();
         this.createRedmineCallback();
         let url = ENDPOINT.issues_url
             .replace(":key", this.getRedmineAccessKey());
-        return this.$http.jsonp(url).then(IssueService.onResult);
+        //return this.$http.jsonp(url).then(IssueService.onResult);
+        return this.$http.get(url).then(IssueService.onResult);
     }
 
     createRedmineCallback() {
@@ -58,6 +59,16 @@ export default class IssueService {
 
     static onResult(result:any) {
         return IssueService.formatIssues(result.data.issues);
+    }
+
+    fetchRedmineIssue(id:number):ng.IPromise<any> {
+        this.createRedmineCallback();
+        let url = ENDPOINT.issue_url
+            .replace(":id", id.toString())
+            .replace(":key", this.getRedmineAccessKey());
+        return this.$http.get(url).then((result)=> {
+            return result.data.issue;
+        });
     }
 
     // 整形は利用するエンドポイントごとに異なるので、APIに押し込む

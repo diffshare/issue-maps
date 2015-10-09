@@ -25,6 +25,10 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
     }
 );
 
+module.config(($httpProvider:ng.IHttpProvider)=> {
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+});
+
 import ENDPOINT from "./Setting"
 import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";

@@ -5,9 +5,7 @@ export default class IssueDirective implements ng.IDirective {
 
     restrict:string = "E";
     scope:Object = {
-        issues: "=issues",
-        filteredIssues: "=filteredIssues",
-        selectedIssue: "=selectedIssue"
+        editMode: "&editMode",
     };
     bindToController:Boolean = true;
     controller = IssueController;
@@ -18,13 +16,21 @@ export default class IssueDirective implements ng.IDirective {
 class IssueController {
 
     issue = null;
+    isEditMode:boolean;
+    editMode:Function;
 
-    constructor(private $scope:ng.IScope, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService) {
+    constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService) {
         this.fetchIssue();
+        this.isEditMode = !!this.editMode();
+        console.log("isEditMode=" + this.isEditMode);
     }
 
     async fetchIssue() {
         this.issue = await this.IssueService.fetchRedmineIssue(this.$stateParams["id"]);
         this.$scope.$apply();
+    }
+
+    clickSubmit() {
+        this.$state.go("issue", {id: this.$stateParams["id"]});
     }
 }

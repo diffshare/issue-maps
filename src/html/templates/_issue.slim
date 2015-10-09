@@ -1,4 +1,4 @@
-.issue-page
+.issue-page ng-hide="ctrl.isEditMode"
   h1
     | {{ctrl.issue.subject}}
   p
@@ -7,5 +7,16 @@
     | {{ctrl.issue.description}}
   p
     | {{ctrl.issue.status.name}}
+  p
+    a href="" ui-sref="issue_edit({id: ctrl.issue.id})" 編集
 
-p ここを詳細のページではなく、編集ページにして更新をかけられればOK
+.issue-page ng-show="ctrl.isEditMode"
+  h1
+    input type="text" ng-model="ctrl.issue.subject"
+  p
+    | {{ctrl.issue.author.name}}
+  p
+    textarea ng-model="ctrl.issue.description"
+  p
+    button ng-click="ctrl.clickSubmit()" 更新
+    a href="" ui-sref="issue({id: ctrl.issue.id})" キャンセル

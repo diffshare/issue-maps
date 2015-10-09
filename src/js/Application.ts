@@ -17,10 +17,13 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
                 url: "/",
                 templateUrl: "templates/_home.html"
             })
-            .state("issue",
-            {
+            .state("issue", {
                 url: "/issues/:id",
                 templateUrl: "templates/_issues_show.html"
+            })
+            .state("issue_edit", {
+                url: "/issues/:id/edit",
+                templateUrl: "templates/_issues_edit.html"
             })
     }
 );

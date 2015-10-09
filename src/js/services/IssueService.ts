@@ -66,7 +66,7 @@ export default class IssueService {
         let url = ENDPOINT.issue_url
             .replace(":id", id.toString())
             .replace(":key", this.getRedmineAccessKey());
-        return this.$http.get(url).then((result)=> {
+        return this.$http.get(url).then((result:any)=> {
             return result.data.issue;
         });
     }

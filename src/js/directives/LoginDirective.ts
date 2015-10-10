@@ -31,6 +31,6 @@ class LoginController {
         }
 
         this.IssueService.setRedmineAccessKey(this.accessKey);
-        window.location.href = "/";
+        window.location.href = "/index.html";
     }
 }

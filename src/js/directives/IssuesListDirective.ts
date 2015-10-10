@@ -51,7 +51,7 @@ class IssuesListController {
     }
 
     closeAll() {
-        this.issues.forEach((issue)=> {
+        this.issues.forEach((issue:any)=> {
             issue.show = false;
         });
     }

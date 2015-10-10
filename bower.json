@@ -17,6 +17,7 @@
     "angular-google-maps": "~2.2.1",
     "angular-ui-router": "~0.2.15",
     "angular-moment": "~0.10.3",
-    "angular-touch": "~1.4.6"
+    "angular-touch": "~1.4.6",
+    "angular-material": "~0.11.2"
   }
 }

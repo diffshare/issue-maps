@@ -1,7 +1,6 @@
-.home
-  .left
-    / issues-listはctrl.issuesのフィルタリングを行い、その結果をfilteredIssuesに格納する
-    issues-list issues="ctrl.issues" filtered-issues="filteredIssues" selected-issue="selectedIssue"
+section.home layout="row" flex=""
+  / issues-listはctrl.issuesのフィルタリングを行い、その結果をfilteredIssuesに格納する
+  issues-list.left issues="ctrl.issues" filtered-issues="filteredIssues" selected-issue="selectedIssue"
   .right
     / mapsはフィルタされたfilteredIssuesを表示する
     maps issues="filteredIssues" selected-issue="selectedIssue"

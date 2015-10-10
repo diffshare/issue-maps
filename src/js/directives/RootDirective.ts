@@ -9,7 +9,7 @@ export default class RootDirective implements ng.IDirective {
     bindToController:Boolean = true;
     controller = RootController;
     controllerAs = "ctrl";
-    template:string = "<div ui-view></div>";
+    templateUrl:string = "templates/_root.html";
 }
 
 class RootController {

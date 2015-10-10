@@ -1,20 +1,34 @@
-.content
-  p
-    | キーワード
+md-toolbar
+  .md-toolbar-tools
+    h1.md-title
+      | クエスト
+      | &nbsp;
+      small
+        | {{ctrl.filteredIssues.length}}
+    span flex=""
+    md-menu
+      md-button ng-click="$mdOpenMenu($event)"
+        | カテゴリ選択
+      md-menu-content width="4"
+        md-menu-item ng-repeat="(category, value) in ctrl.categories"
+          md-button ng-click="ctrl.clickCategory(category)"
+            | {{category}}({{value}})
+        md-menu-item
+          md-button ng-click="ctrl.clickCategory('')"
+            | クリア
+md-content.flex layout-padding=""
+  md-input-container
+    label キーワード
     input type="text" ng-model="ctrl.query"
-    a.category href="" ng-repeat="(category, value) in ctrl.categories" ng-click="ctrl.clickCategory(category)"
-      | {{category}}({{value}})
-    a.category href="" ng-click="ctrl.clickCategory('')"
-      | クリア
-  p
-    |順番
-    select ng-model="ctrl.selectedIssuesOrder" ng-options="order for order in ctrl.issuesOrders"
-  p
-    | 検索結果 {{filteredMarkers.length}}件
-  .issues
+  md-input-container
+    label 順番
+    md-select ng-model="ctrl.selectedIssuesOrder"
+      md-option ng-repeat="order in ctrl.issuesOrders" value="{{order}}"
+        | {{order}}
+  ul
     / 検索結果が100件を超えるとDOMの生成コストが大きくて、スマートデバイスでの動作が遅くなる
     / そのときにはlimitTo: 100を入れたり、DOM生成コストを小さくする工夫が必要、と書いておく
-    .issue ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)"
+    li ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)"
       .issue-title
         | {{i.title}}
         | &nbsp;

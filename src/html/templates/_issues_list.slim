@@ -1,10 +1,7 @@
 md-toolbar
   .md-toolbar-tools
     h1.md-title
-      | クエスト
-      | &nbsp;
-      small
-        | {{ctrl.filteredIssues.length}}
+      | {{ctrl.filteredIssues.length}} 件
     span flex=""
     md-menu
       md-button ng-click="$mdOpenMenu($event)"
@@ -16,7 +13,7 @@ md-toolbar
         md-menu-item
           md-button ng-click="ctrl.clickCategory('')"
             | クリア
-md-content.flex layout-padding=""
+md-content layout-padding="" md-scroll-y="" flex=""
   md-input-container
     label キーワード
     input type="text" ng-model="ctrl.query"
@@ -32,7 +29,7 @@ md-content.flex layout-padding=""
       .issue-title
         | {{i.title}}
         | &nbsp;
-      .issue-control
+      /.issue-control
         a.edit ui-sref="issue({id: i.id})"
           | 詳細
       .issue-description

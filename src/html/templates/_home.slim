@@ -1,5 +1,5 @@
-section layout="row" flex=""
+section layout="row" flex="" style="overflow: hidden;"
   / issues-listはctrl.issuesのフィルタリングを行い、その結果をfilteredIssuesに格納する
-  issues-list issues="ctrl.issues" filtered-issues="filteredIssues" selected-issue="selectedIssue" flex=""
+  issues-list issues="ctrl.issues" filtered-issues="filteredIssues" selected-issue="selectedIssue" flex="30" layout="column"
   / mapsはフィルタされたfilteredIssuesを表示する
-  maps issues="filteredIssues" selected-issue="selectedIssue" flex=""
+  maps issues="filteredIssues" selected-issue="selectedIssue" flex="70"

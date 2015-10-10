@@ -2,31 +2,40 @@
 
 'use strict';
 
-let module = angular.module("issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment", "ngMaterial"]);
+let module = angular.module("issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment", "ngMaterial", "http-auth-interceptor"]);
 
 module.run((amMoment)=> {
     amMoment.changeLocale("ja");
 });
 
+module.run(($rootScope:ng.IRootScopeService, $state:ng.ui.IStateService)=> {
+    $rootScope.$on("event:auth-loginRequired", ()=> {
+        $state.go("login");
+    });
+});
+
 module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider)=> {
 
-        $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/");
 
-        $stateProvider
-            .state("home", {
-                url: "/",
-                templateUrl: "templates/_home.html"
-            })
-            .state("issue", {
-                url: "/issues/:id",
-                templateUrl: "templates/_issues_show.html"
-            })
-            .state("issue_edit", {
-                url: "/issues/:id/edit",
-                templateUrl: "templates/_issues_edit.html"
-            })
-    }
-);
+    $stateProvider
+        .state("login", {
+            url: "/login",
+            template: "<login></login>"
+        })
+        .state("home", {
+            url: "/",
+            templateUrl: "templates/_home.html"
+        })
+        .state("issue", {
+            url: "/issues/:id",
+            templateUrl: "templates/_issues_show.html"
+        })
+        .state("issue_edit", {
+            url: "/issues/:id/edit",
+            templateUrl: "templates/_issues_edit.html"
+        })
+});
 
 module.config(($httpProvider:ng.IHttpProvider)=> {
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -37,6 +46,7 @@ import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";
 import IssuesListDirective from "./directives/IssuesListDirective";
 import IssueDirective from "./directives/IssueDirective";
+import LoginDirective from "./directives/LoginDirective";
 import IssueService from "./services/IssueService"
 
 module.directive("root", ()=> {
@@ -50,5 +60,8 @@ module.directive("issuesList", ()=> {
 });
 module.directive("issue", ()=> {
     return new IssueDirective();
+});
+module.directive("login", ()=> {
+    return new LoginDirective();
 });
 module.service("IssueService", IssueService);

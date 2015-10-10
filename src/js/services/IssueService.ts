@@ -2,7 +2,7 @@ import ENDPOINT from "../Setting";
 
 export default class IssueService {
 
-    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService) {
+    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService, private $rootScope:ng.IRootScopeService) {
     }
 
     fetchIssues():ng.IPromise<any> {
@@ -11,6 +11,10 @@ export default class IssueService {
 
         let url = "/assets/issues.json";
         return this.$http.get(url).then(IssueService.onResult);
+    }
+
+    checkLoggedIn() {
+        if (this.getRedmineAccessKey() == null) throw new Error("auth error");
     }
 
     isLoggedIn():boolean {
@@ -34,12 +38,17 @@ export default class IssueService {
             this.$window.localStorage.removeItem("redmine-access-key");
     }
 
+    setRedmineAccessKey(accessKey:string):void {
+        this.$window.localStorage.setItem("redmine-access-key", accessKey);
+    }
+
     getRedmineAccessKey():string {
         return this.$window.localStorage.getItem("redmine-access-key");
     }
 
     fetchRedmineIssues():ng.IPromise<any> {
         //if (!this.isRedmineLoggedIn()) this.inputRedmineKey();
+        this.checkLoggedIn();
         this.createRedmineCallback();
         let url = ENDPOINT.issues_url
             .replace(":key", this.getRedmineAccessKey());

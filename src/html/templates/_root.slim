@@ -1,11 +1,12 @@
-section layout="row" flex=""
-  md-sidenav.md-sidenav-left.md-whiteframe-z2 md-component-id="left" md-is-locked-open="$mdMedia('gt-md')"
-    md-toolbar.md-theme-indigo
-      h1.md-toolbar-tools
-        | Sodemav Lef
-    md-content layout-padding=""
-      md-button.md-primary hide-gt-md=""
-        | Close Dide Left
-      p
-        | This
-  div ui-view=""
+section layout="column" flex="" style="height: 100%;" ng-cloak=""
+  section layout="row" flex=""
+    md-sidenav.md-sidenav-left.md-whiteframe-z2 md-component-id="left" md-is-locked-open="$mdMedia('gt-md')"
+      md-toolbar.md-theme-indigo
+        h1.md-toolbar-tools
+          | メニュー
+      md-content layout-padding=""
+        a.menu-button.md-default-theme
+          | ホーム
+        a.menu-button.md-default-theme
+          | クエストの作成
+    div ui-view="" flex="" layout="column"

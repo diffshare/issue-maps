@@ -16,7 +16,7 @@ class RootController {
 
     issues = [];
 
-    constructor(private $scope:ng.IScope, private IssueService:IssueService) {
+    constructor(private $scope:ng.IScope, private IssueService:IssueService, private $state:ng.ui.IStateService) {
         this.updateIssues();
     }
 
@@ -27,6 +27,7 @@ class RootController {
             this.$scope.$apply();
         } catch (e) {
             console.error(e.message);
+            this.$state.go("login");
             //this.IssueService.inputRedmineKey();
         }
     }

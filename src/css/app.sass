@@ -22,9 +22,10 @@ md-sidenav.md-locked-open
   border-bottom: 1px solid #eee
 
 .search
-  background-color: #fdfdfd
+  background-color: #eee
 
 $left-width: 30%
+$border-color: #ccc
 
 .category
   margin-left: 10px
@@ -49,10 +50,10 @@ $left-width: 30%
   -webkit-overflow-scrolling: touch
 
 .issues
-  border-top: 1px solid #f0f0f0
+  border-top: .5px solid $border-color
 .issue
   position: relative
-  border-bottom: 1px dashed #f0f0f0
+  border-bottom: .5px solid $border-color
   overflow: hidden
   padding: 5px 10px
   a.edit
@@ -65,13 +66,16 @@ $left-width: 30%
       color: lighten(#1A1AD4, 0%)
       &:hover
         text-decoration: underline
-
+.issue-content
+  margin-right: 50px
+  overflow: hidden
 .issue-control
   position: absolute
   top: 10px
   right: 10px
 .issue-title
   margin: 5px 0
+  font-weight: 700
 .issue-description
   color: gray
   font-size: 90%
@@ -82,6 +86,15 @@ $left-width: 30%
 .issue-start-date, .issue-created-on
   //text-align: right
   font-size: 80%
+.issue-created-on
+  color: #267ED5
+.issue-start-date
+  color: red
+.issue-date
+  position: absolute
+  top: 10px
+  right: 10px
+  text-align: right
 
 maps
   position: relative

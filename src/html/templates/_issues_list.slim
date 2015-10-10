@@ -13,19 +13,20 @@ md-toolbar
         md-menu-item
           md-button ng-click="ctrl.clickCategory('')"
             | クリア
-md-content layout-padding="" md-scroll-y="" flex=""
-  md-input-container
-    label キーワード
-    input type="text" ng-model="ctrl.query"
-  md-input-container
-    label 順番
-    md-select ng-model="ctrl.selectedIssuesOrder"
-      md-option ng-repeat="order in ctrl.issuesOrders" value="{{order}}"
-        | {{order}}
-  ul
+md-content md-scroll-y="" flex=""
+  section.search layout-padding="" layout="row"
+    md-input-container flex=""
+      label 検索
+      input type="text" ng-model="ctrl.query"
+    md-input-container flex=""
+      label 順番
+      md-select ng-model="ctrl.selectedIssuesOrder"
+        md-option ng-repeat="order in ctrl.issuesOrders" value="{{order}}"
+          | {{order}}
+  .issues
     / 検索結果が100件を超えるとDOMの生成コストが大きくて、スマートデバイスでの動作が遅くなる
     / そのときにはlimitTo: 100を入れたり、DOM生成コストを小さくする工夫が必要、と書いておく
-    li ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)"
+    .issue ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)" layout-padding=""
       .issue-title
         | {{i.title}}
         | &nbsp;

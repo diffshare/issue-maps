@@ -40,11 +40,13 @@
                 | {{i.latitude}}, {{i.longitude}}
           /.issue-author
             | {{i.author}}
-        .issue-date
+        .issue-right
           .issue-created-on ng-show="i.created_on"
             | {{i.created_on | amTimeAgo}}
           .issue-start-date ng-show="i.start_date"
             | {{i.start_date | amTimeAgo}}
+          .issue-control
+            ng-md-icon icon="edit" ui-sref="issue({id: i.id})"
         /.issue-control
           a.edit ui-sref="issue({id: i.id})"
             | 詳細

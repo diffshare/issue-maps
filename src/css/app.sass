@@ -60,21 +60,16 @@ $border-color: #eee
 
 .issues
   border-top: 1px solid $border-color
+  margin-bottom: 100px
 .issue
   position: relative
   border-bottom: 1px solid $border-color
   overflow: hidden
   padding: 5px 10px 5px 15px
-  a.edit
-    color: lighten(#1A1AD4, 30%)
-    text-decoration: none
+  min-height: 70px
   &:hover
     background-color: #eeeeee
     cursor: pointer
-    a.edit
-      color: lighten(#1A1AD4, 0%)
-      &:hover
-        text-decoration: underline
   &.selected
     background-color: #C5CAE9
     border-left: 5px solid #3F51B5
@@ -83,9 +78,9 @@ $border-color: #eee
   margin-right: 50px
   overflow: hidden
 .issue-control
-  position: absolute
-  top: 10px
-  right: 10px
+  margin-top: 3px
+  fill: #ccc
+  color: #ccc
 .issue-title
   margin: 5px 0
   font-weight: 700
@@ -103,7 +98,7 @@ $border-color: #eee
   color: #267ED5
 .issue-start-date
   color: red
-.issue-date
+.issue-right
   position: absolute
   top: 10px
   right: 10px

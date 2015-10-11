@@ -45,7 +45,7 @@
             | {{i.created_on | amTimeAgo}}
           .issue-start-date ng-show="i.start_date"
             | {{i.start_date | amTimeAgo}}
-          .issue-control
+          /.issue-control
             ng-md-icon icon="edit" ui-sref="issue({id: i.id})"
         /.issue-control
           a.edit ui-sref="issue({id: i.id})"

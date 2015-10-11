@@ -44,6 +44,10 @@ class IssuesListController {
     }
 
     clickIssue(issue) {
+        if (issue == this.selectedIssue) {
+            this.selectedIssue = null;
+            return;
+        }
         //console.log("clickIssue");
         this.closeAll();
         issue.show = true;

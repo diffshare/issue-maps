@@ -28,10 +28,11 @@ class MapsController {
 
     markersEvents = {
         click: (marker, eventName, model, args)=> {
-            this.issues.forEach((issue)=> {
+            this.issues.forEach((issue:any)=> {
                 issue.show = false;
             });
             model.show = true
+            this.selectedIssue = model;
         }
     };
 

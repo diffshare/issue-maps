@@ -8,6 +8,14 @@ module.run((amMoment)=> {
     amMoment.changeLocale("ja");
 });
 
+module.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        //    key: 'your api key',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'places' // Required for SearchBox.
+    });
+});
+
 module.run(($rootScope:ng.IRootScopeService, $state:ng.ui.IStateService)=> {
     $rootScope.$on("event:auth-loginRequired", ()=> {
         $state.go("login");
@@ -23,12 +31,17 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
             url: "/login",
             template: "<login></login>"
         })
+        .state("issues_new", {
+            url: "/issues/new",
+            template: '<issue mode="\'new\'"></issue>'
+        })
         .state("issues", {
             url: "/",
             templateUrl: "templates/_home.html"
         })
         .state("issues.show", {
-            url: "issues/:id"
+            url: "issues/:id",
+            template: '<issue selected-issue="selectedIssue" flex></issue>'
         })
         .state("issues.edit", {
             url: "issues/:id/edit"

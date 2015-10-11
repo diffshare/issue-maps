@@ -1,4 +1,10 @@
-ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'
+ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom' events="ctrl.mapEvents"
+  script type="text/ng-template" id="search.tpl.html"
+    input type="text" placeholder="地図検索"
+  ui-gmap-search-box template="'search.tpl.html'" parentdiv="'search'" events="ctrl.searchEvents"
+  ui-gmap-marker idKey="ctrl.clickedMarker.id" coords="ctrl.clickedMarker.coords" show="true"
+    ui-gmap-window options="ctrl.windowOptions"
+      div クエストを作成
   ui-gmap-markers models="ctrl.issues" coords="'self'" events="ctrl.markersEvents"
     ui-gmap-windows show="'showWindow'"
       .window ng-non-bindable=""

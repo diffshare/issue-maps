@@ -1,22 +1,4 @@
-.issue-page ng-hide="ctrl.isEditMode"
-  h1
-    | {{ctrl.issue.subject}}
-  p
-    | {{ctrl.issue.author.name}}
-  p
-    | {{ctrl.issue.description}}
-  p
-    | {{ctrl.issue.status.name}}
-  p
-    a href="" ui-sref="issue_edit({id: ctrl.issue.id})" 編集
-
-.issue-page ng-show="ctrl.isEditMode"
-  h1
-    input type="text" ng-model="ctrl.issue.subject"
-  p
-    | {{ctrl.issue.author.name}}
-  p
-    textarea ng-model="ctrl.issue.description"
-  p
-    button ng-click="ctrl.clickSubmit()" 更新
-    a href="" ui-sref="issue({id: ctrl.issue.id})" キャンセル
+div ng-show="!ctrl.loading" flex=""
+  div ng-include="ctrl.getPage()"
+.loading ng-show="ctrl.loading" layout="row" layout-sm="column" layout-align="space-around"
+  md-progress-circular class="md-hue-2" md-mode="indeterminate"

@@ -1,0 +1,14 @@
+.issue-page layout-padding=""
+  md-input-container flex=""
+    label タイトル
+    input type="text" ng-model="ctrl.issue.subject"
+  md-input-container flex=""
+    label 概要
+    textarea ng-model="ctrl.issue.description"
+  md-input-container flex=""
+    label 場所検索
+    input type="text" ng-model="ctrl.issue.place"
+  .md-actions layout="row"
+    span flex=""
+    md-button ng-click="ctrl.clickSubmit()" 更新
+    md-button href="" ui-sref="issue({id: ctrl.issue.id})" キャンセル

@@ -5,7 +5,8 @@ export default class IssueDirective implements ng.IDirective {
 
     restrict:string = "E";
     scope:Object = {
-        editMode: "&editMode",
+        selectedIssue: "=selectedIssue",
+        mode: "&mode",
     };
     bindToController:Boolean = true;
     controller = IssueController;
@@ -15,18 +16,34 @@ export default class IssueDirective implements ng.IDirective {
 
 class IssueController {
 
-    issue = null;
+    selectedIssue:any = null;
+    issue:any = null;
     isEditMode:boolean;
-    editMode:Function;
+    mode:Function;
+    loading:boolean = false;
 
-    constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService) {
+    constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService, private $rootScope:ng.IRootScopeService) {
+        this.$scope.$watch(()=> this.selectedIssue, ()=> this.fetchIssue());
         this.fetchIssue();
-        this.isEditMode = !!this.editMode();
-        console.log("isEditMode=" + this.isEditMode);
+
+        this.$rootScope.$on("$stateChangeSuccess", ()=> this.fetchIssue());
+    }
+
+    getPage():string {
+        return "templates/issue/_" + this.mode() + ".html";
+    }
+
+    updateMode() {
+        // 詳細もしくは編集の場合
+        this.isEditMode = !!this.$state.includes("issues.edit");
     }
 
     async fetchIssue() {
-        this.issue = await this.IssueService.fetchRedmineIssue(this.$stateParams["id"]);
+        if (this.selectedIssue == null) return;
+        //console.log("fetchIssue: "+this.selectedIssue.id);
+        this.loading = true;
+        this.issue = await this.IssueService.fetchRedmineIssue(this.selectedIssue.id);
+        this.loading = false;
         this.$scope.$apply();
     }
 

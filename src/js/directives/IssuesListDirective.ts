@@ -23,20 +23,38 @@ class IssuesListController {
     issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"];
     selectedIssuesOrder = "id";
     selectedIssue:any = null;
+    firstIssueId:string = null;
 
-    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private $rootScope:ng.IRootScopeService) {
+    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private $rootScope:ng.IRootScopeService, private $mdDialog:any) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
         this.$scope.$watch(()=> this.issues, ()=> this.updateFilteredIssues());
-        this.$rootScope.$on("$stateChangeSuccess", ()=> this.updateFilteredIssues());
+        this.firstIssueId = this.$stateParams["id"];
+        this.$rootScope.$on("$stateChangeSuccess", ()=> this.updateSelectedIssue());
+    }
+
+    isIssueShow():boolean {
+        return !!(this.$state.includes("issues.show") || this.$state.includes("issues.edit"));
+    }
+
+    updateSelectedIssue() {
+        // issueが存在して、urlで指定されているのであれば、選択する
+        if (this.issues.length > 0 && (this.$state.includes("issues.show") || this.$state.includes("issues.edit"))) {
+            this.selectIssue(this.firstIssueId);
+            this.firstIssueId = null;
+        }
     }
 
     selectIssue(issueId) {
-        this.closeAll();
-        var issue = this.issues.filter((issue:any)=> {
-            return issue.id.toString() == issueId
-        })[0];
-        issue.show = true; // 地図のwindowを開く
-        this.selectedIssue = issue;
+        this.issues.forEach((issue:any)=> {
+
+            if (issue.id.toString() == issueId) {
+                issue.show = true; // 地図のwindowを開く
+                this.selectedIssue = issue;
+                console.log("show:"+issueId+"/"+issue.id);
+            }
+            else
+                issue.show = false;
+        });
     }
 
     updateFilteredIssues() {
@@ -48,9 +66,7 @@ class IssuesListController {
         });
         this.filteredIssues = this.$filter("filter")(this.issues, this.query);
 
-        // issueが存在して、urlで指定されているのであれば、選択する
-        if (this.issues.length > 0 && (this.$state.includes("issues.show") || this.$state.includes("issues.edit")))
-            this.selectIssue(this.$stateParams["id"]);
+        this.updateSelectedIssue();
     }
 
     clickCategory(category) {
@@ -65,14 +81,15 @@ class IssuesListController {
             return;
         }
 
-        this.$state.go("issues.show", {
-            id: issue.id
-        });
+        if (this.isIssueShow()) {
+            this.$state.go(this.$state.current, {id: issue.id});
+        }
+        this.selectIssue(issue.id);
     }
 
-    closeAll() {
-        this.issues.forEach((issue:any)=> {
-            issue.show = false;
+    clickAdd() {
+        this.$mdDialog.show({
+            templateUrl: "templates/_new_issue_dialog.html"
         });
     }
 }

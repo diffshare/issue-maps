@@ -23,17 +23,15 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
             url: "/login",
             template: "<login></login>"
         })
-        .state("home", {
+        .state("issues", {
             url: "/",
             templateUrl: "templates/_home.html"
         })
-        .state("issue", {
-            url: "/issues/:id",
-            templateUrl: "templates/_issues_show.html"
+        .state("issues.show", {
+            url: "issues/:id"
         })
-        .state("issue_edit", {
-            url: "/issues/:id/edit",
-            templateUrl: "templates/_issues_edit.html"
+        .state("issues.edit", {
+            url: "issues/:id/edit"
         })
 });
 

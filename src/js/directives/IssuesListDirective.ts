@@ -22,11 +22,21 @@ class IssuesListController {
     categories:Object;
     issuesOrders = ["id", "start_date", "created_on", "title", "latitude", "longitude"];
     selectedIssuesOrder = "id";
-    selectedIssue = null;
+    selectedIssue:any = null;
 
-    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService) {
+    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private $rootScope:ng.IRootScopeService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
         this.$scope.$watch(()=> this.issues, ()=> this.updateFilteredIssues());
+        this.$rootScope.$on("$stateChangeSuccess", ()=> this.updateFilteredIssues());
+    }
+
+    selectIssue(issueId) {
+        this.closeAll();
+        var issue = this.issues.filter((issue:any)=> {
+            return issue.id.toString() == issueId
+        })[0];
+        issue.show = true; // 地図のwindowを開く
+        this.selectedIssue = issue;
     }
 
     updateFilteredIssues() {
@@ -37,22 +47,27 @@ class IssuesListController {
             this.categories[issue.category] += 1;
         });
         this.filteredIssues = this.$filter("filter")(this.issues, this.query);
+
+        // issueが存在して、urlで指定されているのであれば、選択する
+        if (this.issues.length > 0 && (this.$state.includes("issues.show") || this.$state.includes("issues.edit")))
+            this.selectIssue(this.$stateParams["id"]);
     }
 
     clickCategory(category) {
         this.query = category;
     }
 
-    clickIssue(issue) {
+    clickIssue(issue:any) {
         if (issue == this.selectedIssue) {
             issue.show = false; // 地図のwindowを閉じる
             this.selectedIssue = null;
+            this.$state.go("issues");
             return;
         }
-        //console.log("clickIssue");
-        this.closeAll();
-        issue.show = true; // 地図のwindowを開く
-        this.selectedIssue = issue;
+
+        this.$state.go("issues.show", {
+            id: issue.id
+        });
     }
 
     closeAll() {

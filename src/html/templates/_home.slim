@@ -10,7 +10,7 @@ section layout="row" flex="" style="overflow: hidden;"
           span ng-show="selectedIssue"
             | {{selectedIssue.title}}
         span flex=""
-        md-button.md-icon-button ui-sref="issue({id: selectedIssue.id})" ng-show="selectedIssue"
+        md-button.md-icon-button ui-sref="issues.edit({id: selectedIssue.id})" ng-show="selectedIssue"
           ng-md-icon icon="edit"
     / mapsはフィルタされたfilteredIssuesを表示する
     maps.md-whiteframe-z2 issues="filteredIssues" selected-issue="selectedIssue" flex=""

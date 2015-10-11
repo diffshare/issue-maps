@@ -45,12 +45,13 @@ class IssuesListController {
 
     clickIssue(issue) {
         if (issue == this.selectedIssue) {
+            issue.show = false; // 地図のwindowを閉じる
             this.selectedIssue = null;
             return;
         }
         //console.log("clickIssue");
         this.closeAll();
-        issue.show = true;
+        issue.show = true; // 地図のwindowを開く
         this.selectedIssue = issue;
     }
 

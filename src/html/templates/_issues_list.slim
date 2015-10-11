@@ -1,4 +1,6 @@
-.relative layout="column" layout-fill=""
+.relative layout="column" layout-fill="" flex=""
+  md-button.md-fab.md-fab-bottom-right label="Add" aria-label="Add"
+    ng-md-icon icon="add"
   md-toolbar
     .md-toolbar-tools
       h1.md-title
@@ -46,5 +48,3 @@
         /.issue-control
           a.edit ui-sref="issue({id: i.id})"
             | 詳細
-  md-button.md-fab.md-fab-bottom-right label="Add"
-    ng-md-icon icon="add"

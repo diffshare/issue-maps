@@ -2,7 +2,7 @@
 
 'use strict';
 
-let module = angular.module("issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment", "ngMaterial", "http-auth-interceptor"]);
+let module = angular.module("issueMaps", ["ui.router", "uiGmapgoogle-maps", "angularMoment", "ngMaterial", "http-auth-interceptor", "ngMdIcons"]);
 
 module.run((amMoment)=> {
     amMoment.changeLocale("ja");

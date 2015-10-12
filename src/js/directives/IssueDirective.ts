@@ -42,6 +42,7 @@ class IssueController {
         if (this.selectedIssue == null) return;
         //console.log("fetchIssue: "+this.selectedIssue.id);
         this.loading = true;
+        // XXX: tryによるエラーハンドリング
         this.issue = await this.IssueService.fetchRedmineIssue(this.selectedIssue.id);
         this.loading = false;
         this.$scope.$apply();

@@ -21,7 +21,6 @@ class RootController {
     }
 
     async updateIssues() {
-        // XXX tryによるエラーハンドリング
         try {
             this.issues = await this.IssueService.fetchIssues();
             this.$scope.$apply();

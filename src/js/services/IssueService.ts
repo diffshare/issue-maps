@@ -46,24 +46,17 @@ export default class IssueService {
         return this.$window.localStorage.getItem("redmine-access-key");
     }
 
+    prepareAccessKey() {
+        this.$http.defaults.headers.common["X-Redmine-API-Key"] = this.getRedmineAccessKey();
+    }
+
     fetchRedmineIssues():ng.IPromise<any> {
         //if (!this.isRedmineLoggedIn()) this.inputRedmineKey();
         this.checkLoggedIn();
-        this.createRedmineCallback();
-        let url = ENDPOINT.issues_url
-            .replace(":key", this.getRedmineAccessKey());
+        this.prepareAccessKey();
+        let url = ENDPOINT.issues_url;
         //return this.$http.jsonp(url).then(IssueService.onResult);
         return this.$http.get(url).then(IssueService.onResult);
-    }
-
-    createRedmineCallback() {
-        // redmineがjsonpのcallback文字列からdotを消してしまう件について
-        var $window:any = this.$window;
-        var c:any = $window.angular.callbacks.counter.toString(36);
-        $window['angularcallbacks_' + c] = (data)=> {
-            $window.angular.callbacks['_' + c](data);
-            delete $window['angularcallbacks_' + c];
-        };
     }
 
     static onResult(result:any) {
@@ -71,20 +64,18 @@ export default class IssueService {
     }
 
     fetchRedmineIssue(id:number):ng.IPromise<any> {
-        this.createRedmineCallback();
+        this.prepareAccessKey();
         let url = ENDPOINT.issue_url
-            .replace(":id", id.toString())
-            .replace(":key", this.getRedmineAccessKey());
+            .replace(":id", id.toString());
         return this.$http.get(url).then((result:any)=> {
             return result.data.issue;
         });
     }
 
     updateRedmineIssue(id:number, issue:any):ng.IPromise<any> {
-        this.createRedmineCallback();
+        this.prepareAccessKey();
         let url = ENDPOINT.issue_url
-            .replace(":id", id.toString())
-            .replace(":key", this.getRedmineAccessKey());
+            .replace(":id", id.toString());
         return this.$http.put(url, {issue: issue}).then((result:any)=> {
             console.log(result);
         });

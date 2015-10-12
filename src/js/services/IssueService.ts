@@ -2,7 +2,7 @@ import ENDPOINT from "../Setting";
 
 export default class IssueService {
 
-    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService, private $rootScope:ng.IRootScopeService) {
+    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService) {
     }
 
     fetchIssues():ng.IPromise<any> {

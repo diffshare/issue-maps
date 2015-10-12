@@ -8,7 +8,7 @@ module.run((amMoment)=> {
     amMoment.changeLocale("ja");
 });
 
-module.config(function(uiGmapGoogleMapApiProvider) {
+module.config(function (uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         //    key: 'your api key',
         v: '3.20', //defaults to latest 3.X anyhow
@@ -60,19 +60,10 @@ import IssueDirective from "./directives/IssueDirective";
 import LoginDirective from "./directives/LoginDirective";
 import IssueService from "./services/IssueService"
 
-module.directive("root", ()=> {
-    return new RootDirective();
-});
-module.directive("maps", ()=> {
-    return new MapsDirective();
-});
-module.directive("issuesList", ()=> {
-    return new IssuesListDirective();
-});
-module.directive("issue", ()=> {
-    return new IssueDirective();
-});
-module.directive("login", ()=> {
-    return new LoginDirective();
-});
+module.directive("root", ()=> new RootDirective());
+module.directive("maps", ()=> new MapsDirective());
+module.directive("issuesList", ()=> new IssuesListDirective());
+module.directive("issue", ()=> new IssueDirective());
+module.directive("login", ()=> new LoginDirective());
+
 module.service("IssueService", IssueService);

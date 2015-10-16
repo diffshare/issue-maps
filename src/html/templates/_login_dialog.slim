@@ -8,6 +8,8 @@ md-dialog aria-label="login" ng-cloak=""
         md-input-container
           label Redmine API Access Key
           input ng-model="accessKey" md-autofocus=""
+      p
+        | 正しいKeyを入れてもログインできない場合は、スーパーリロード（Ctrl+F5）をして下さい。
       .md-actions layout="row"
         md-button ng-click="answer(accessKey)"
           | ログイン

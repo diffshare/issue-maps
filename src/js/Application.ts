@@ -69,13 +69,11 @@ import RootDirective from "./directives/RootDirective";
 import MapsDirective from "./directives/MapsDirective";
 import IssuesListDirective from "./directives/IssuesListDirective";
 import IssueDirective from "./directives/IssueDirective";
-import LoginDirective from "./directives/LoginDirective";
 import IssueService from "./services/IssueService"
 
 module.directive("root", ()=> new RootDirective());
 module.directive("maps", ()=> new MapsDirective());
 module.directive("issuesList", ()=> new IssuesListDirective());
 module.directive("issue", ()=> new IssueDirective());
-module.directive("login", ()=> new LoginDirective());
 
 module.service("IssueService", IssueService);

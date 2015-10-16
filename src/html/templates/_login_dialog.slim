@@ -1,0 +1,13 @@
+md-dialog aria-label="login" ng-cloak=""
+  form
+    md-toolbar
+      .md-toolbar-tools
+        h2 Redmine API Access Key Required
+    md-dialog-content
+      .md-dialog-content
+        md-input-container
+          label Redmine API Access Key
+          input ng-model="accessKey" md-autofocus=""
+      .md-actions layout="row"
+        md-button ng-click="answer(accessKey)"
+          | ログイン

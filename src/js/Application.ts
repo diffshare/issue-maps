@@ -16,35 +16,51 @@ module.config(function (uiGmapGoogleMapApiProvider) {
     });
 });
 
-module.run(($rootScope:ng.IRootScopeService, $state:ng.ui.IStateService)=> {
+module.run(($rootScope:ng.IRootScopeService, $mdDialog:any, IssueService:any, authService:any)=> {
     $rootScope.$on("event:auth-loginRequired", ()=> {
-        $state.go("login");
+        $mdDialog.show({
+            templateUrl: "templates/_login_dialog.html",
+            parent: angular.element(document.body),
+            controller: ($scope:any, $mdDialog:any)=> {
+                $scope.answer = (key)=> {
+                    $mdDialog.hide(key);
+                }
+            }
+        }).then((key:any)=> {
+            IssueService.setRedmineAccessKey(key);
+            authService.loginConfirmed("success", (config:any)=> {
+                config.headers["X-Redmine-API-Key"] = key;
+                return config;
+            });
+        });
     });
 });
 
 module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider)=> {
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/issues");
 
     $stateProvider
-        .state("login", {
-            url: "/login",
-            template: "<login></login>"
-        })
-        .state("issues_new", {
-            url: "/issues/new",
-            template: '<issue mode="\'new\'"></issue>'
-        })
         .state("issues", {
-            url: "/",
-            templateUrl: "templates/_home.html"
+            url: "/issues",
+            abstract: true,
+            template: '<ui-view layout-fill></ui-view>'
+        })
+        .state("issues.index", {
+            url: "",
+            template: '<issues-list layout="column" filtered-issues="ctrl.filteredIssues" selected-issue="ctrl.selectedIssue"></issues-list>'
+        })
+        .state("issues.new", {
+            url: "/new",
+            templateUrl: "templates/_issues_new.html"
         })
         .state("issues.show", {
-            url: "issues/:id",
-            template: '<issue selected-issue="selectedIssue" flex></issue>'
+            url: "/:id",
+            template: '<issue mode="\'show\'"></issue>'
         })
         .state("issues.edit", {
-            url: "issues/:id/edit"
+            url: "/:id/edit",
+            template: '<issue mode="\'edit\'"></issue>'
         })
 });
 

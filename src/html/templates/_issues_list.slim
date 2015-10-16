@@ -1,52 +1,64 @@
-.relative layout="column" layout-fill="" flex=""
-  /md-button.md-fab.md-fab-bottom-right label="Add" aria-label="Add" ng-click="ctrl.clickAdd()"
-    ng-md-icon icon="add"
-  md-toolbar
-    .md-toolbar-tools
-      h1.md-title
-        | {{ctrl.filteredIssues.length}} 件
-      span flex=""
-      md-menu
-        md-button ng-click="$mdOpenMenu($event)"
-          | カテゴリ選択
-        md-menu-content width="4"
-          md-menu-item ng-repeat="(category, value) in ctrl.categories"
-            md-button ng-click="ctrl.clickCategory(category)"
-              | {{category}}({{value}})
-          md-menu-item
-            md-button ng-click="ctrl.clickCategory('')"
-              | クリア
-  md-content md-scroll-y="" flex=""
-    section.search layout-padding="" layout="row"
-      md-input-container flex=""
-        label 検索
-        input type="text" ng-model="ctrl.query"
-      md-input-container flex=""
-        label 順番
-        md-select ng-model="ctrl.selectedIssuesOrder"
-          md-option ng-repeat="order in ctrl.issuesOrders" value="{{order}}"
-            | {{order}}
-    .issues
-      / 検索結果が100件を超えるとDOMの生成コストが大きくて、スマートデバイスでの動作が遅くなる
-      / そのときにはlimitTo: 100を入れたり、DOM生成コストを小さくする工夫が必要、と書いておく
-      .issue ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)" layout-padding="" ng-class="{selected: i == ctrl.selectedIssue}" ng-dblclick="ctrl.dblclickIssue(i)"
-        .issue-content
-          .issue-title
-            | {{i.title}}
-            | &nbsp;
-          .issue-description
-            | {{i.description}}
-          /.issue-gps
-                | {{i.latitude}}, {{i.longitude}}
-          /.issue-author
-            | {{i.author}}
-        .issue-right
-          .issue-created-on ng-show="i.created_on"
-            | {{i.created_on | amTimeAgo}}
-          .issue-start-date ng-show="i.start_date"
-            | {{i.start_date | amTimeAgo}}
-          /.issue-control
-            ng-md-icon icon="edit" ui-sref="issue({id: i.id})"
+md-button.md-fab.md-fab-bottom-right label="Add" aria-label="Add" ui-sref="issues.new()"
+  ng-md-icon icon="add"
+/md-toolbar flex="none"
+  .md-toolbar-tools
+    h1.md-title
+      | {{ctrl.filteredIssues.length}} 件
+    span flex=""
+    md-menu
+      md-button ng-click="$mdOpenMenu($event)"
+        | カテゴリ選択
+      md-menu-content width="4"
+        md-menu-item ng-repeat="(category, value) in ctrl.categories"
+          md-button ng-click="ctrl.clickCategory(category)"
+            | {{category}}({{value}})
+        md-menu-item
+          md-button ng-click="ctrl.clickCategory('')"
+            | クリア
+section.search layout-padding="" layout="row" layout-align="center center"
+  md-button.md-icon-button
+    ng-md-icon icon="menu"
+  md-input-container flex=""
+    label 検索
+    input type="text" ng-model="ctrl.query"
+  md-input-container flex=""
+    label 順番
+    md-select ng-model="ctrl.selectedIssuesOrder"
+      md-option ng-repeat="order in ctrl.issuesOrders" value="{{order}}"
+        | {{order}}
+  md-menu
+    md-button.md-icon-button ng-click="$mdOpenMenu($event)"
+      ng-md-icon icon="filter_list"
+    md-menu-content width="4"
+      md-menu-item ng-repeat="(category, value) in ctrl.categories"
+        md-button ng-click="ctrl.clickCategory(category)"
+          | {{category}}({{value}})
+      md-menu-item
+        md-button ng-click="ctrl.clickCategory('')"
+          | クリア
+md-content md-scroll-y="" flex=""
+  .issues
+    / 検索結果が100件を超えるとDOMの生成コストが大きくて、スマートデバイスでの動作が遅くなる
+    / そのときにはlimitTo: 100を入れたり、DOM生成コストを小さくする工夫が必要、と書いておく
+    .issue ng-repeat="i in ctrl.filteredIssues | orderBy:ctrl.selectedIssuesOrder" ng-click="ctrl.clickIssue(i)" layout-padding="" ng-class="{selected: i == ctrl.selectedIssue}" ng-dblclick="ctrl.dblclickIssue(i)"
+      .issue-content
+        .issue-title
+          | {{i.title}}
+          | &nbsp;
+        .issue-description
+          | {{i.description}}
+        /.issue-gps
+              | {{i.latitude}}, {{i.longitude}}
+        /.issue-author
+          | {{i.author}}
+      .issue-right
+        .issue-created-on ng-show="i.created_on"
+          | {{i.created_on | amTimeAgo}}
+        .issue-start-date ng-show="i.start_date"
+          | {{i.start_date | amTimeAgo}}
         /.issue-control
-          a.edit ui-sref="issue({id: i.id})"
-            | 詳細
+          md-button.md-icon-button ui-sref="issues.show({id: i.id})"
+            ng-md-icon icon="info"
+      /.issue-control
+        a.edit ui-sref="issue({id: i.id})"
+          | 詳細

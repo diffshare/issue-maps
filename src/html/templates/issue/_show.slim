@@ -1,6 +1,11 @@
-.issue-page
-  h1
-    | {{ctrl.issue.subject}}
+md-toolbar
+  .md-toolbar-tools
+    h1.md-title
+      | {{ctrl.issue.subject}}
+    span flex=""
+    md-button.md-icon-button ui-sref="issues.edit({id: ctrl.id})"
+      ng-md-icon icon="edit"
+md-content flex=""
   p
     | {{ctrl.issue.author.name}}
   p

@@ -2,7 +2,9 @@ import ENDPOINT from "../Setting";
 
 export default class IssueService {
 
-    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService) {
+    issuesCache:Object = {};
+
+    constructor(private $http:ng.IHttpService, private $window:ng.IWindowService, private $q:ng.IQService) {
     }
 
     fetchIssues():ng.IPromise<any> {
@@ -10,7 +12,7 @@ export default class IssueService {
             return this.fetchRedmineIssues();
 
         let url = "/assets/issues.json";
-        return this.$http.get(url).then(IssueService.onResult);
+        return this.$http.get(url).then(this.onResult);
     }
 
     checkLoggedIn() {
@@ -52,18 +54,29 @@ export default class IssueService {
 
     fetchRedmineIssues():ng.IPromise<any> {
         //if (!this.isRedmineLoggedIn()) this.inputRedmineKey();
-        this.checkLoggedIn();
+        //this.checkLoggedIn();
         this.prepareAccessKey();
         let url = ENDPOINT.issues_url;
         //return this.$http.jsonp(url).then(IssueService.onResult);
-        return this.$http.get(url).then(IssueService.onResult);
+        return this.$http.get(url).then((result:any) => {
+            result.data.issues.forEach((issue:any)=> {
+                this.issuesCache[issue.id.toString()] = issue;
+            });
+            return IssueService.formatIssues(result.data.issues);
+        });
     }
 
-    static onResult(result:any) {
+    onResult(result:any) {
+        result.data.issues.forEach((issue:any)=> {
+            this.issuesCache[issue.id.toString()] = issue;
+        });
         return IssueService.formatIssues(result.data.issues);
     }
 
-    fetchRedmineIssue(id:number):ng.IPromise<any> {
+    fetchRedmineIssue(id:number, caching:boolean = true):ng.IPromise<any> {
+        if (caching && this.issuesCache[id.toString()])
+            return this.$q.when(this.issuesCache[id.toString()]);
+
         this.prepareAccessKey();
         let url = ENDPOINT.issue_url
             .replace(":id", id.toString());

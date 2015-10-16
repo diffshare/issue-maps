@@ -1,4 +1,7 @@
-.issue-page layout-padding=""
+md-toolbar
+  .md-toolbar-tools
+    h1.md-title 登録
+md-content layout-padding=""
   md-input-container flex=""
     label タイトル
     input type="text" ng-model="ctrl.issue.subject"
@@ -10,5 +13,5 @@
     input type="text" ng-model="ctrl.issue.place"
   .md-actions layout="row"
     span flex=""
-    md-button ng-click="ctrl.clickSubmit()" 更新
-    md-button href="" ui-sref="issue({id: ctrl.issue.id})" キャンセル
+    md-button.md-primary.md-raised ng-click="ctrl.clickSubmit()" 登録
+    md-button ui-sref="issues.index()" キャンセル

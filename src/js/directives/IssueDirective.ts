@@ -5,7 +5,6 @@ export default class IssueDirective implements ng.IDirective {
 
     restrict:string = "E";
     scope:Object = {
-        selectedIssue: "=selectedIssue",
         mode: "&mode",
     };
     bindToController:Boolean = true;
@@ -16,14 +15,14 @@ export default class IssueDirective implements ng.IDirective {
 
 class IssueController {
 
-    selectedIssue:any = null;
+    id:string;
     issue:any = null;
     isEditMode:boolean;
     mode:Function;
     loading:boolean = false;
 
     constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService, private $rootScope:ng.IRootScopeService) {
-        this.$scope.$watch(()=> this.selectedIssue, ()=> this.fetchIssue());
+        this.id = $stateParams["id"];
         this.fetchIssue();
 
         this.$rootScope.$on("$stateChangeSuccess", ()=> this.fetchIssue());
@@ -39,11 +38,11 @@ class IssueController {
     }
 
     async fetchIssue() {
-        if (this.selectedIssue == null) return;
         //console.log("fetchIssue: "+this.selectedIssue.id);
         this.loading = true;
+        let caching:boolean = !(this.$state.includes("issues.edit"));
         // XXX: tryによるエラーハンドリング
-        this.issue = await this.IssueService.fetchRedmineIssue(this.selectedIssue.id);
+        this.issue = await this.IssueService.fetchRedmineIssue(this.$stateParams["id"], caching);
         this.loading = false;
         this.$scope.$apply();
     }

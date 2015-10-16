@@ -14,20 +14,9 @@ export default class RootDirective implements ng.IDirective {
 
 class RootController {
 
-    issues = [];
+    filteredIssues:Array<any> = [];
 
     constructor(private $scope:ng.IScope, private IssueService:IssueService, private $state:ng.ui.IStateService) {
-        this.updateIssues();
     }
 
-    async updateIssues() {
-        try {
-            this.issues = await this.IssueService.fetchIssues();
-            this.$scope.$apply();
-        } catch (e) {
-            console.error(e.message);
-            this.$state.go("login");
-            //this.IssueService.inputRedmineKey();
-        }
-    }
 }

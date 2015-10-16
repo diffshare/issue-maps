@@ -23,8 +23,8 @@ class MapsController {
         zoom: 12
     };
 
-    issues:Array<any>;
-    selectedIssue:any;
+    issues:Array<any> = [];
+    selectedIssue:any = null;
     clickedMarker:any = {
         id: "clickedMaker",
         coords: null

@@ -1,10 +1,15 @@
-.issue-page
-  h1
+md-toolbar
+  .md-toolbar-tools
+    h1.md-title
+      | 情報を変更する
+md-content flex="" layout-padding=""
+  md-input-container
+    label 地点の名前
     input type="text" ng-model="ctrl.issue.subject"
-  p
-    | {{ctrl.issue.author.name}}
-  p
+  md-input-container
+    label 概要
     textarea ng-model="ctrl.issue.description"
-  p
-    button ng-click="ctrl.clickSubmit()" 更新
-    a href="" ui-sref="issue({id: ctrl.issue.id})" キャンセル
+  .md-actions layout="row"
+    span flex=""
+    md-button.md-primary.md-raised ng-click="ctrl.clickSubmit()" 変更する
+    md-button ui-sref="issues.index()" キャンセル

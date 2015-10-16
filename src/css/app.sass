@@ -26,6 +26,21 @@ md-sidenav.md-locked-open
   width: 180px
   min-width: 180px
 
+.left-menu
+  width: 408px
+  height: 100%
+  z-index: 1
+
+ui-view, issue
+  display: block
+  width: 100%
+  height: 100%
+issues-list
+  display: block
+  width: 100%
+  height: 100%
+  position: relative
+
 .menu-button
   cursor: pointer
   display: block
@@ -36,6 +51,8 @@ md-sidenav.md-locked-open
 
 .search
   background-color: #eee
+  ng-md-icon
+    fill: #999
 
 $left-width: 30%
 $border-color: #eee
@@ -83,8 +100,8 @@ $border-color: #eee
   overflow: hidden
 .issue-control
   margin-top: 3px
-  fill: #ccc
-  color: #ccc
+  ng-md-icon
+    fill: #777
 .issue-title
   margin: 5px 0
   font-weight: 700

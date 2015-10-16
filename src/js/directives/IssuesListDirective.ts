@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
+import IssueService from "../services/IssueService";
 export default class IssuesListDirective implements ng.IDirective {
 
     restrict:string = "E";
@@ -25,11 +26,25 @@ class IssuesListController {
     selectedIssue:any = null;
     firstIssueId:string = null;
 
-    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private $rootScope:ng.IRootScopeService, private $mdDialog:any) {
+    constructor(private $scope:ng.IScope, private $filter:ng.IFilterService, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private $rootScope:ng.IRootScopeService, private $mdDialog:any, private IssueService:IssueService) {
         this.$scope.$watch(()=> this.query, ()=> this.updateFilteredIssues());
         this.$scope.$watch(()=> this.issues, ()=> this.updateFilteredIssues());
         this.firstIssueId = this.$stateParams["id"];
         this.$rootScope.$on("$stateChangeSuccess", ()=> this.updateSelectedIssue());
+
+        this.updateIssues();
+    }
+
+    async updateIssues() {
+        try {
+            this.issues = await this.IssueService.fetchIssues();
+            this.$scope.$apply();
+        } catch (e) {
+            console.error(e.message);
+            this.$rootScope.$broadcast("event:auth-loginRequired");
+            //this.$state.go("login");
+            //this.IssueService.inputRedmineKey();
+        }
     }
 
     isIssueShow():boolean {
@@ -58,6 +73,7 @@ class IssuesListController {
     }
 
     updateFilteredIssues() {
+        if (this.issues == null) return;
         this.categories = {};
         this.issues.forEach((issue)=> {
             if (!issue.category) return;
@@ -74,17 +90,11 @@ class IssuesListController {
     }
 
     clickIssue(issue:any) {
-        if (issue == this.selectedIssue) {
-            issue.show = false; // 地図のwindowを閉じる
-            this.selectedIssue = null;
-            this.$state.go("issues");
-            return;
-        }
-
-        if (this.isIssueShow()) {
-            this.$state.go(this.$state.current, {id: issue.id});
-        }
         this.selectIssue(issue.id);
+    }
+
+    dblclickIssue(issue:any) {
+        this.$state.go("issues.show", {id: issue.id});
     }
 
     clickAdd() {

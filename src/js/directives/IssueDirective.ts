@@ -21,11 +21,9 @@ class IssueController {
     mode:Function;
     loading:boolean = false;
 
-    constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService, private $rootScope:ng.IRootScopeService) {
+    constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService) {
         this.id = $stateParams["id"];
         this.fetchIssue();
-
-        this.$rootScope.$on("$stateChangeSuccess", ()=> this.fetchIssue());
     }
 
     getPage():string {

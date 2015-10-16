@@ -38,6 +38,7 @@ class IssueController {
     }
 
     async fetchIssue() {
+        if (this.mode() == "new") return;
         //console.log("fetchIssue: "+this.selectedIssue.id);
         this.loading = true;
         let caching:boolean = !(this.$state.includes("issues.edit"));

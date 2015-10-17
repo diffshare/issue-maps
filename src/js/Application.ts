@@ -56,15 +56,15 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
         })
         .state("issues.new", {
             url: "/new",
-            template: '<issue mode="\'new\'"></issue>'
+            template: '<issue mode="\'new\'" filtered-issues="ctrl.filteredIssues"></issue>'
         })
         .state("issues.show", {
             url: "/:id",
-            template: '<issue mode="\'show\'"></issue>'
+            template: '<issue mode="\'show\'" filtered-issues="ctrl.filteredIssues"></issue>'
         })
         .state("issues.edit", {
             url: "/:id/edit",
-            template: '<issue mode="\'edit\'"></issue>'
+            template: '<issue mode="\'edit\'" filtered-issues="ctrl.filteredIssues"></issue>'
         })
 });
 

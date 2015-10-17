@@ -36,6 +36,10 @@ module.run(($rootScope:ng.IRootScopeService, $mdDialog:any, IssueService:any, au
     });
 });
 
+module.config(($httpProvider:ng.IHttpProvider)=> {
+    $httpProvider.defaults.withCredentials = true;
+});
+
 module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider)=> {
 
     $urlRouterProvider.otherwise("/issues");

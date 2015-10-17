@@ -9,6 +9,9 @@ md-content flex="" layout-padding=""
   md-input-container
     label 概要
     textarea ng-model="ctrl.issue.description"
+  md-input-container
+    label 注記（更新時コメント）
+    textarea ng-model="ctrl.issue.notes"
   .md-actions layout="row"
     span flex=""
     md-button.md-primary.md-raised ng-click="ctrl.clickSubmit()" 変更する

@@ -1,11 +1,11 @@
 md-toolbar
   .md-toolbar-tools
-    md-button.md-icon-button ui-sref="issues.index()"
+    md-button.md-icon-button ui-sref="issues.index()" aria-label="Back"
       ng-md-icon icon="arrow_back"
     h1.md-title
       | {{ctrl.issue.subject}}
     span flex=""
-    md-button.md-icon-button ui-sref="issues.edit({id: ctrl.id})"
+    md-button.md-icon-button ui-sref="issues.edit({id: ctrl.id})" aria-label="Edit"
       ng-md-icon icon="edit"
 md-content flex=""
   p

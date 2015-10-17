@@ -7,7 +7,8 @@ export default class IssueDirective implements ng.IDirective {
     scope:Object = {
         mode: "&mode",
         filteredIssues: "=filteredIssues",
-        selectedIssue: "=selectedIssue"
+        selectedIssue: "=selectedIssue",
+        latlng: "=latlng"
     };
     bindToController:Boolean = true;
     controller = IssueController;
@@ -24,10 +25,12 @@ class IssueController {
     loading:boolean = false;
     filteredIssues:Array<any>;
     selectedIssue:any;
+    latlng: string;
 
     constructor(private $scope:ng.IScope, private $state:ng.ui.IStateService, private $stateParams:ng.ui.IStateParamsService, private IssueService:IssueService) {
         this.id = $stateParams["id"];
         this.fetchIssue();
+        this.$scope.$watch(()=> this.latlng, ()=> this.updateLatlng());
     }
 
     getPage():string {
@@ -46,8 +49,9 @@ class IssueController {
         let caching:boolean = !(this.$state.includes("issues.edit"));
         // XXX: tryによるエラーハンドリング
         this.issue = await this.IssueService.fetchRedmineIssue(this.$stateParams["id"], caching);
-        this.filteredIssues = [IssueService.formatIssue(this.issue)];
-        this.selectedIssue = IssueService.formatIssue(this.issue);
+        let formattedIssue = IssueService.formatIssue(this.issue);
+        this.filteredIssues = [formattedIssue];
+        this.selectedIssue = formattedIssue;
         this.loading = false;
         this.$scope.$apply();
     }
@@ -61,5 +65,14 @@ class IssueController {
         await this.IssueService.updateRedmineIssue(this.issue.id, this.issue);
         this.IssueService.clearRedmineIssueCache(this.issue.id);
         this.$state.go("issues.show", {id: this.issue.id});
+    }
+
+    private updateLatlng():void {
+        if (!this.issue) return;
+        this.issue.custom_fields.forEach((field:any) => {
+            if (field.name != "場所") return;
+
+            field.value = this.latlng;
+        });
     }
 }

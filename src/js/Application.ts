@@ -64,7 +64,7 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
         })
         .state("issues.edit", {
             url: "/:id/edit",
-            template: '<issue mode="\'edit\'" filtered-issues="ctrl.filteredIssues" selected-issue="ctrl.selectedIssue"></issue>'
+            template: '<issue mode="\'edit\'" filtered-issues="ctrl.filteredIssues" selected-issue="ctrl.selectedIssue" latlng="ctrl.latlng"></issue>'
         })
 });
 

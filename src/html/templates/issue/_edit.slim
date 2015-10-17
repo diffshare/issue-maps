@@ -1,6 +1,6 @@
 md-toolbar
   .md-toolbar-tools
-    md-button.md-icon-button ui-sref="issues.show({id: ctrl.issue.id})"
+    md-button.md-icon-button ui-sref="issues.show({id: ctrl.issue.id})" aria-label="Back"
       ng-md-icon icon="arrow_back"
     h1.md-title
       | 情報を変更する
@@ -11,6 +11,11 @@ md-content flex="" layout-padding=""
   md-input-container
     label 概要
     textarea ng-model="ctrl.issue.description"
+  section ng-repeat="field in ctrl.issue.custom_fields" ng-if="field.name == '場所'"
+    md-input-container
+      label 場所
+      input type="text" ng-model="field.value"
+    #search
   md-input-container
     label 注記（更新時コメント）
     textarea ng-model="ctrl.issue.notes"

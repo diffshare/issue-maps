@@ -15,8 +15,9 @@ export default class RootDirective implements ng.IDirective {
 class RootController {
 
     filteredIssues:Array<any> = [];
+    mode:string;
 
-    constructor(private $scope:ng.IScope, private IssueService:IssueService, private $state:ng.ui.IStateService) {
+    constructor(private $scope:ng.IScope) {
     }
 
 }

@@ -1,5 +1,7 @@
 md-toolbar
   .md-toolbar-tools
+    md-button.md-icon-button ui-sref="issues.show({id: ctrl.issue.id})"
+      ng-md-icon icon="arrow_back"
     h1.md-title 登録
 md-content layout-padding=""
   md-input-container flex=""
@@ -8,10 +10,10 @@ md-content layout-padding=""
   md-input-container flex=""
     label 概要
     textarea ng-model="ctrl.issue.description"
-  md-input-container flex=""
+  /md-input-container flex=""
     label 場所検索
     input type="text" ng-model="ctrl.issue.place"
   .md-actions layout="row"
     span flex=""
-    md-button.md-primary.md-raised ng-click="ctrl.clickSubmit()" 登録
-    md-button ui-sref="issues.index()" キャンセル
+    md-button.md-primary.md-raised ng-click="ctrl.createIssue()" 登録
+    /md-button ui-sref="issues.index()" キャンセル

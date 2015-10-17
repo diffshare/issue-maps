@@ -1,5 +1,7 @@
 md-toolbar
   .md-toolbar-tools
+    md-button.md-icon-button ui-sref="issues.show({id: ctrl.issue.id})"
+      ng-md-icon icon="arrow_back"
     h1.md-title
       | 情報を変更する
 md-content flex="" layout-padding=""
@@ -14,5 +16,5 @@ md-content flex="" layout-padding=""
     textarea ng-model="ctrl.issue.notes"
   .md-actions layout="row"
     span flex=""
-    md-button.md-primary.md-raised ng-click="ctrl.clickSubmit()" 変更する
-    md-button ui-sref="issues.index()" キャンセル
+    md-button.md-primary.md-raised ng-click="ctrl.updateIssue()" 変更する
+    /md-button ui-sref="issues.show({id: ctrl.issue.id})" キャンセル

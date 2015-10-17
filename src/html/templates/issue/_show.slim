@@ -1,5 +1,7 @@
 md-toolbar
   .md-toolbar-tools
+    md-button.md-icon-button ui-sref="issues.index()"
+      ng-md-icon icon="arrow_back"
     h1.md-title
       | {{ctrl.issue.subject}}
     span flex=""

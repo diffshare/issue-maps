@@ -46,7 +46,12 @@ class IssueController {
         this.$scope.$apply();
     }
 
-    async clickSubmit() {
+    async createIssue() {
+        let issue = await this.IssueService.createRedmineIssue(this.issue);
+        this.$state.go("issues.show", {id: issue.id});
+    }
+
+    async updateIssue() {
         await this.IssueService.updateRedmineIssue(this.issue.id, this.issue);
         this.IssueService.clearRedmineIssueCache(this.issue.id);
         this.$state.go("issues.show", {id: this.issue.id});

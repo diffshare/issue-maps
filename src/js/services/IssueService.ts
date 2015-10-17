@@ -90,6 +90,19 @@ export default class IssueService {
             delete this.issuesCache[id.toString()];
     }
 
+    createRedmineIssue(issue:any):ng.IPromise<any> {
+        this.prepareAccessKey();
+        let url = ENDPOINT.endpoint_url + "issues.json";
+        // XXX: とりあえずのマジックナンバー
+        angular.extend(issue, {
+            project_id: 1,
+            tracker_id: 1
+        });
+        return this.$http.post(url, {issue: issue}).then((result:any)=> {
+            return result.data.issue;
+        });
+    }
+
     updateRedmineIssue(id:number, issue:any):ng.IPromise<any> {
         this.prepareAccessKey();
         let url = ENDPOINT.issue_url
@@ -101,12 +114,12 @@ export default class IssueService {
 
     // 整形は利用するエンドポイントごとに異なるので、APIに押し込む
     static formatIssues(issues:Array<any>) {
-        return issues.map(IssueService.formatIssue);
+        return issues.map(IssueService.formatIssue).filter((issue)=>{return issue.latitude});
     }
 
     static formatIssue(issue:any):Object {
         for (var c of issue.custom_fields) {
-            if (c.name == "場所")
+            if (c.name == "場所" && c.value)
                 [issue.latitude, issue.longitude] = c.value.split(",");
         }
         return {

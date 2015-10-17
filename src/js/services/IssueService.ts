@@ -85,6 +85,11 @@ export default class IssueService {
         });
     }
 
+    clearRedmineIssueCache(id:number):void {
+        if (this.issuesCache[id.toString()])
+            delete this.issuesCache[id.toString()];
+    }
+
     updateRedmineIssue(id:number, issue:any):ng.IPromise<any> {
         this.prepareAccessKey();
         let url = ENDPOINT.issue_url

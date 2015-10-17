@@ -56,7 +56,7 @@ module.config(($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUr
         })
         .state("issues.new", {
             url: "/new",
-            template: '<issue mode="\'new\'" filtered-issues="ctrl.filteredIssues" selected-issue="ctrl.selectedIssue"></issue>'
+            template: '<issue mode="\'new\'" filtered-issues="ctrl.filteredIssues" selected-issue="ctrl.selectedIssue" latlng="ctrl.latlng"></issue>'
         })
         .state("issues.show", {
             url: "/:id",

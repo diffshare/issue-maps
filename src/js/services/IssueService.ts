@@ -114,7 +114,7 @@ export default class IssueService {
 
     // 整形は利用するエンドポイントごとに異なるので、APIに押し込む
     static formatIssues(issues:Array<any>) {
-        return issues.map(IssueService.formatIssue).filter((issue)=>{return issue.latitude});
+        return issues.map(IssueService.formatIssue).filter((issue:any)=>{return issue.latitude});
     }
 
     static formatIssue(issue:any):Object {

@@ -31,6 +31,21 @@ class IssueController {
         this.id = $stateParams["id"];
         this.fetchIssue();
         this.$scope.$watch(()=> this.latlng, ()=> this.updateLatlng());
+
+        if ($state.includes("issues.new"))
+            this.issue = {
+                custom_fields: [{
+                    id: 3, // マジックナンバー
+                    name: "場所",
+                    value: ""
+                }]
+            };
+            this.selectedIssue = {
+                id: "select",
+                latitude: 35.68519569653298,
+                longitude: 139.75278877116398
+            };
+            this.filteredIssues = [this.selectedIssue];
     }
 
     getPage():string {

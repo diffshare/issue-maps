@@ -5,14 +5,16 @@ md-toolbar
     h1.md-title 登録
 md-content layout-padding=""
   md-input-container flex=""
-    label タイトル
+    label 地点の名前
     input type="text" ng-model="ctrl.issue.subject"
   md-input-container flex=""
     label 概要
     textarea ng-model="ctrl.issue.description"
-  /md-input-container flex=""
-    label 場所検索
-    input type="text" ng-model="ctrl.issue.place"
+  section ng-repeat="field in ctrl.issue.custom_fields" ng-if="field.name == '場所'"
+    md-input-container
+      label 場所
+      input type="text" ng-model="field.value"
+    #search
   .md-actions layout="row"
     span flex=""
     md-button.md-primary.md-raised ng-click="ctrl.createIssue()" 登録

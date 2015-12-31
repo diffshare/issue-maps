@@ -4,6 +4,8 @@ del = require "del"
 fs = require "fs"
 packageJson = require "./package.json"
 
+tsd = require "gulp-tsd"
+
 #browserify = require "browserify"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"
@@ -18,6 +20,7 @@ gulp.task "build", [
 ]
 gulp.task "build:pre", [
   #"build:coffee"
+  "build:tsd"
   "build:ts"
 ]
 
@@ -25,6 +28,9 @@ gulp.task "build:coffee", ->
   gulp.src "src/js/**/*.coffee"
   .pipe $.coffee()
   .pipe gulp.dest("lib")
+
+gulp.task "build:tsd", (callback) ->
+  tsd {command: "reinstall", config: "./tsd.json"}, callback
 
 gulp.task "build:ts", ->
   gulp.src "src/js/**/*.ts"
@@ -95,6 +101,11 @@ gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
   gulp.watch "./src/js/**/*.ts",      ["build:ts"]
   gulp.watch "./src/html/**/*.slim",    ["build:slim"]
   gulp.watch "./src/css/**/*.sass",    ["build:sass"]
+
+gulp.task "test", [
+  "build"
+  # TODO test
+]
 
 gulp.task "default", ["build"]
 

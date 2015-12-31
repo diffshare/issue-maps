@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"OK: npm install is OK\" && exit 0"
+    "test": "node_modules/.bin/gulp test"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "gulp-ruby-sass": "^2.0.6",
     "gulp-s3": "^0.3.0",
     "gulp-slim": "0.3.0",
+    "gulp-tsd": "0.0.4",
     "gulp-typescript": "^2.9.1",
     "gulp-watchify": "git://github.com/marcello3d/gulp-watchify.git",
     "vinyl-source-stream": "^1.1.0",

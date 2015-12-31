@@ -28,7 +28,7 @@
     "gulp-s3": "^0.3.0",
     "gulp-slim": "0.0.13",
     "gulp-typescript": "^2.9.1",
-    "gulp-watchify": "^0.5.0",
+    "gulp-watchify": "https://github.com/marcello3d/gulp-watchify.git",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   }

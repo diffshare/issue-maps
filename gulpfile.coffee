@@ -34,7 +34,9 @@ gulp.task "build:ts", ->
     sortOutput: true
     experimentalAsyncFunctions: true
   .pipe $.babel
-    optional: ["runtime"]
+    #optional: ["runtime"]
+    presets: ["es2015"]
+    plugins: ['transform-runtime']
   .pipe gulp.dest("lib")
 
 watching = false
@@ -52,8 +54,7 @@ gulp.task "build:slim", ->
   .pipe gulp.dest("public")
 
 gulp.task "build:sass", ->
-  gulp.src "src/css/**/*.sass"
-  .pipe $.rubySass()
+  $.rubySass("src/css/**/*.sass")
   .pipe gulp.dest("public/css")
 
 gulp.task "build:bower", ->

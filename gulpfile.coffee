@@ -21,7 +21,6 @@ gulp.task "build", [
 gulp.task "build:pre", [
   #"build:coffee"
   "build:tsd"
-  "build:ts"
 ]
 
 gulp.task "build:coffee", ->
@@ -32,7 +31,7 @@ gulp.task "build:coffee", ->
 gulp.task "build:tsd", (callback) ->
   tsd {command: "reinstall", config: "./tsd.json"}, callback
 
-gulp.task "build:ts", ->
+gulp.task "build:ts", ["build:ts"], ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
     target:"es6"

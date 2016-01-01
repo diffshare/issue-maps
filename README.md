@@ -6,7 +6,21 @@ issue-maps
 
 AngularJSでGoogle Mapsを扱う。
 
-# requires
+# Requires
 
 * ruby sass
 * ruby slim
+
+# Use
+
+src/js/Setting.tsのredmineのUrlをSettingSample.tsを参考に書き換える．
+
+# Build
+```
+$ gem install sass
+$ gem install slim -v '>= 3.0.2'
+$ npm install
+$ bower install
+$ npm install -g gulp
+$ gulp build
+```

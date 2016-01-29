@@ -1,0 +1,23 @@
+{
+  "name": "angular2-webpack-babel-starter",
+  "version": "0.0.0",
+  "description": "A skeleton Angular 2 app built with Babel and Webpack.",
+  "scripts": {
+    "clean": "npm cache clean && rimraf node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diffshare/angular2-webpack-babel-starter.git"
+  },
+  "author": "diffshare",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diffshare/angular2-webpack-babel-starter/issues"
+  },
+  "homepage": "https://github.com/diffshare/angular2-webpack-babel-starter#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^2.5.1"
+  }
+}

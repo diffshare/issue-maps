@@ -6,7 +6,7 @@ A skeleton Angular 2 app built with Babel and Webpack.
 
 ```bash
 npm install
-npm start
+npm run server
 ```
 
 # Inspiration

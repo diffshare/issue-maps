@@ -32,7 +32,7 @@
     "html-webpack-plugin": "^2.7.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
-    "slm": "^0.5.0",
+    "slm": "https://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",

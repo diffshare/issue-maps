@@ -1,1 +1,8 @@
-| Home
+h1 Home
+ul
+  li *ngFor="#element of list"
+    dl
+      dt {{element.title}}
+      dd
+        p {{element.description}}
+        p {{element.url}}

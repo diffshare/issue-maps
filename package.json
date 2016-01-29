@@ -4,6 +4,7 @@
   "description": "A skeleton Angular 2 app built with Babel and Webpack.",
   "scripts": {
     "clean": "npm cache clean && rimraf node_modules dist",
+    "watch": "webpack --watch --progress --profile --coloes --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,7 +27,11 @@
     "zone.js": "0.5.10"
   },
   "devDependencies": {
+    "html-loader": "^0.4.0",
+    "html-webpack-plugin": "^2.7.2",
     "rimraf": "^2.5.1",
+    "slm": "^0.5.0",
+    "slm-loader": "^0.1.1",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
     "webpack": "^1.12.12"

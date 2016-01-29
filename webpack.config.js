@@ -1,3 +1,5 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: './src/main.ts',
 
@@ -9,7 +11,15 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.ts$/, loader: 'ts-loader'}
+            {test: /\.ts$/, loader: 'ts-loader'},
+
+            {test: /\.html$/, loader: 'html-loader'},
+
+            {test: /\.(slim|slm)$/, loader: 'slm'}
         ]
-    }
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({template: 'html!src/index.slim', inject: true})
+    ]
 };

@@ -1,9 +1,10 @@
 p
   b
     | app
-a [routerLink]="['Home']"
-  | home
-a [routerLink]="['Page1']"
-  | page1
+ul
+  li: a [routerLink]="['Home']"
+    | home
+  li: a [routerLink]="['Page1']"
+    | page1
 br
 router-outlet

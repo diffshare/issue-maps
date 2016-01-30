@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {ListService} from "./services/list_service";
+import {ListService} from "../services/list_service";
 
 @Component({
     providers: [ListService],

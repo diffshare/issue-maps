@@ -1,9 +1,9 @@
 import {Component} from 'angular2/core';
 import {RouteConfig} from "angular2/router";
-import {Page1} from "./page1";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {ROUTER_PROVIDERS} from "angular2/router";
-import {Home} from "./home";
+import {Home} from "./components/home";
+import {Page1} from "./components/page1";
 
 @Component({
     selector: 'app',

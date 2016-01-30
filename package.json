@@ -34,6 +34,7 @@
     "rimraf": "^2.5.1",
     "slm": "https://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",
+    "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
     "webpack": "^1.12.12",

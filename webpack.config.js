@@ -1,13 +1,17 @@
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
     entry: './src/main.ts',
 
+    devtool: 'source-map',
+
     output: {
         path: './dist',
         filename: '[name].bundle.js',
-        sourceMapFilename: 'bundle.map'
+        sourceMapFilename: '[name].map',
+        chuckFilename: '[id].chunk.js'
     },
 
     resolve: {
@@ -15,6 +19,9 @@ module.exports = {
     },
 
     module: {
+        preLoaders: [
+            {test: /\.js$/, loader: "source-map-loader", exclude: [/node_modules/]}
+        ],
         loaders: [
             {test: /\.ts$/, loader: 'ts-loader'},
 
@@ -25,6 +32,7 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(true),
         new HtmlWebpackPlugin({template: 'src/index.slim', inject: true})
     ]
 };

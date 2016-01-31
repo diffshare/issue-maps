@@ -1,7 +1,7 @@
-# angular2-webpack-babel-starter
-[![Build Status](https://travis-ci.org/diffshare/angular2-webpack-babel-starter.svg?branch=master)](https://travis-ci.org/diffshare/angular2-webpack-babel-starter)
+# angular2-webpack-slm-starter
+[![Build Status](https://travis-ci.org/diffshare/angular2-webpack-slm-starter.svg?branch=master)](https://travis-ci.org/diffshare/angular2-webpack-slm-starter)
 
-A skeleton Angular 2 app built with Babel and Webpack.
+A skeleton Angular 2 app built with Slm and Webpack.
 
 # Quick start
 

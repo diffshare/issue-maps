@@ -1,7 +1,7 @@
 {
-  "name": "angular2-webpack-babel-starter",
+  "name": "angular2-webpack-slm-starter",
   "version": "0.0.0",
-  "description": "A skeleton Angular 2 app built with Babel and Webpack.",
+  "description": "A skeleton Angular 2 app built with Slm and Webpack.",
   "scripts": {
     "clean": "npm cache clean && rimraf node_modules dist",
     "watch": "webpack --watch --progress --profile --coloes --display-error-details --display-cached",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diffshare/angular2-webpack-babel-starter.git"
+    "url": "git+https://github.com/diffshare/angular2-webpack-slm-starter.git"
   },
   "author": "diffshare",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/diffshare/angular2-webpack-babel-starter/issues"
+    "url": "https://github.com/diffshare/angular2-webpack-slm-starter/issues"
   },
-  "homepage": "https://github.com/diffshare/angular2-webpack-babel-starter#readme",
+  "homepage": "https://github.com/diffshare/angular2-webpack-slm-starter#readme",
   "dependencies": {
     "angular2": "^2.0.0-beta.2",
     "es6-promise": "^3.0.2",

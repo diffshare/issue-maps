@@ -7,7 +7,7 @@
     "watch": "webpack --watch --progress --profile --coloes --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server": "webpack-dev-server --progress --profile --colors --display-error-details --display-cached --content-base src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build"
   },
   "repository": {
     "type": "git",

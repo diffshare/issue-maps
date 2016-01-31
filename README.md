@@ -1,4 +1,3 @@
-
 issue-maps
 ==========
 
@@ -6,7 +5,18 @@ issue-maps
 
 AngularJSでGoogle Mapsを扱う。
 
-# requires
+# Requires
 
-* ruby sass
-* ruby slim
+* ruby
+* bundler
+
+# Use
+
+src/js/Setting.tsのredmineのUrlをSettingSample.tsを参考に書き換える．
+
+# Build
+```
+$ bundle install --path vendor/bundle
+$ npm install
+$ gulp build
+```

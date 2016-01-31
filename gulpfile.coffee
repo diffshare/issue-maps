@@ -1,13 +1,19 @@
 gulp = require "gulp"
+bower = require "gulp-bower"
 $ = require("gulp-load-plugins")()
 del = require "del"
 fs = require "fs"
 packageJson = require "./package.json"
 
+tsd = require "gulp-tsd"
+
 #browserify = require "browserify"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"
 source = require "vinyl-source-stream"
+
+gulp.task "bower:install", ->
+  bower()
 
 gulp.task "build", [
   "build:browserify"
@@ -26,7 +32,10 @@ gulp.task "build:coffee", ->
   .pipe $.coffee()
   .pipe gulp.dest("lib")
 
-gulp.task "build:ts", ->
+gulp.task "build:tsd", (callback) ->
+  tsd {command: "reinstall", config: "./tsd.json"}, callback
+
+gulp.task "build:ts", ["build:tsd"], ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
     target:"es6"
@@ -50,14 +59,14 @@ gulp.task "build:browserify", ["build:pre"], watchify (watchify)->
 
 gulp.task "build:slim", ->
   gulp.src "src/html/**/*.slim"
-  .pipe $.slim()
+  .pipe $.slim({bundler: true})
   .pipe gulp.dest("public")
 
 gulp.task "build:sass", ->
-  $.rubySass("src/css/**/*.sass")
+  $.rubySass("src/css/**/*.sass", {bundleExec: true})
   .pipe gulp.dest("public/css")
 
-gulp.task "build:bower", ->
+gulp.task "build:bower", ["bower:install"], ->
   gulp.src "bower_components/**/*"
   .pipe gulp.dest "public/bower_components"
 
@@ -95,6 +104,17 @@ gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
   gulp.watch "./src/js/**/*.ts",      ["build:ts"]
   gulp.watch "./src/html/**/*.slim",    ["build:slim"]
   gulp.watch "./src/css/**/*.sass",    ["build:sass"]
+
+gulp.task "serve", ["build", "enable-watch-mode"], ->
+  console.log $.connect
+  $.connect.server
+    root: "public"
+    host: "127.0.0.1"
+
+gulp.task "test", [
+  "build"
+  # TODO test
+]
 
 gulp.task "default", ["build"]
 

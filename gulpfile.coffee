@@ -105,6 +105,12 @@ gulp.task "watch", ["build", "enable-watch-mode", "connect"], ->
   gulp.watch "./src/html/**/*.slim",    ["build:slim"]
   gulp.watch "./src/css/**/*.sass",    ["build:sass"]
 
+gulp.task "serve", ["build", "enable-watch-mode"], ->
+  console.log $.connect
+  $.connect.server
+    root: "public"
+    host: "127.0.0.1"
+
 gulp.task "test", [
   "build"
   # TODO test

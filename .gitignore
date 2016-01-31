@@ -6,6 +6,8 @@ typings/
 .sass-cache/
 Setting.ts
 
+bower_components/
+
 .bundle
 Gemfile.local
 vendor

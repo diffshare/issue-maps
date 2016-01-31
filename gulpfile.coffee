@@ -1,4 +1,5 @@
 gulp = require "gulp"
+bower = require "gulp-bower"
 $ = require("gulp-load-plugins")()
 del = require "del"
 fs = require "fs"
@@ -10,6 +11,9 @@ tsd = require "gulp-tsd"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"
 source = require "vinyl-source-stream"
+
+gulp.task "bower:install", ->
+  bower()
 
 gulp.task "build", [
   "build:browserify"
@@ -62,7 +66,7 @@ gulp.task "build:sass", ->
   $.rubySass("src/css/**/*.sass", {bundleExec: true})
   .pipe gulp.dest("public/css")
 
-gulp.task "build:bower", ->
+gulp.task "build:bower", ["bower:install"], ->
   gulp.src "bower_components/**/*"
   .pipe gulp.dest "public/bower_components"
 

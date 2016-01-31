@@ -55,11 +55,11 @@ gulp.task "build:browserify", ["build:pre"], watchify (watchify)->
 
 gulp.task "build:slim", ->
   gulp.src "src/html/**/*.slim"
-  .pipe $.slim()
+  .pipe $.slim({bundler: true})
   .pipe gulp.dest("public")
 
 gulp.task "build:sass", ->
-  $.rubySass("src/css/**/*.sass")
+  $.rubySass("src/css/**/*.sass", {bundleExec: true})
   .pipe gulp.dest("public/css")
 
 gulp.task "build:bower", ->

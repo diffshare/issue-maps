@@ -1,4 +1,14 @@
+node_modules/
 aws.json
 lib/
 public/
+typings/
+.sass-cache/
 Setting.ts
+
+.bundle
+Gemfile.local
+vendor
+
+*~
+*.swp

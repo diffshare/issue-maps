@@ -1,1 +1,5 @@
 sebm-google-map [latitude]="lat" [longitude]="lng"
+sebm-google-map-marker [latitude]="lat" [longitude]="lng" [label]="'M'"
+  sebm-google-map-marker *ngFor="#marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [label]="marker.subject"
+div *ngFor="#marker of markers"
+  | {{marker.subject}},{{marker.lat}},{{marker.lng}}

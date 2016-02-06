@@ -1,5 +1,14 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var dotenv = require('dotenv');
+dotenv.load();
+
+var metadata = {
+    env: {}
+};
+["REDMINE_ISSUE_URL", "REDMINE_API_KEY"].forEach(function(key) {
+    metadata.env[key] = process.env[key];
+});
 
 module.exports = {
 
@@ -43,8 +52,15 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.DedupePlugin(),
-        new HtmlWebpackPlugin({template: 'src/index.slim', inject: true})
+        new HtmlWebpackPlugin({template: 'src/index.slim', inject: true}),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(metadata.env)
+        })
     ],
+
+    devServer: {
+        port: 80
+    },
 
     node: {global: 'window', progress: false, crypto: 'empty', module: false, clearImmediate: false, setImmediate: false}
 };

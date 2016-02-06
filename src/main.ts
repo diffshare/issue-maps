@@ -10,9 +10,11 @@ import {ROUTER_PROVIDERS} from "angular2/router";
 import {provide} from "angular2/core";
 import {LocationStrategy} from "angular2/router";
 import {HashLocationStrategy} from "angular2/router";
+import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from "angular2-google-maps/core";
 
 bootstrap(App, [
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
+    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provide(LocationStrategy, {useClass: HashLocationStrategy})
 ]).catch(err => console.error(err));

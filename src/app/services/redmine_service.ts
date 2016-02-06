@@ -21,8 +21,8 @@ export class RedmineService {
         response.issues.forEach((issue:any)=> {
             issue.custom_fields.forEach((field:any)=> {
                 if (field.name == "場所") {
-                    issue.lat = field.value.split(",")[0];
-                    issue.lng = field.value.split(",")[1];
+                    issue.lat = parseFloat(field.value.split(",")[0]);
+                    issue.lng = parseFloat(field.value.split(",")[1]);
                 }
 
             });

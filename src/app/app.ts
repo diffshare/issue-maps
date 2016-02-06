@@ -5,6 +5,8 @@ import {ROUTER_PROVIDERS} from "angular2/router";
 import {Home} from "./components/home";
 import {Page1} from "./components/page1";
 
+require('./app.sass');
+
 @Component({
     selector: 'app',
     directives: [...ROUTER_DIRECTIVES],

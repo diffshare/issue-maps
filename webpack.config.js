@@ -18,7 +18,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['', '.ts', '.js', '.json', '.css', '.html']
+        extensions: ['', '.ts', '.js', '.json', '.sass', '.html']
     },
 
     module: {
@@ -30,8 +30,14 @@ module.exports = {
 
             {test: /\.html$/, loader: 'raw-loader'},
 
-            {test: /\.(slim|slm)$/, loader: 'html!slm'}
+            {test: /\.(slim|slm)$/, loader: 'html!slm'},
+
+            {test: /\.sass$/, loader: 'style!css!sass'}
         ]
+    },
+
+    sassLoader: {
+        indentedSyntax: true
     },
 
     plugins: [

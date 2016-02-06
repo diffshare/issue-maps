@@ -29,13 +29,17 @@
     "zone.js": "0.5.10"
   },
   "devDependencies": {
+    "css-loader": "^0.23.1",
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.7.2",
+    "node-sass": "^3.4.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
+    "sass-loader": "^3.1.2",
     "slm": "git://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",
     "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.0",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
     "webpack": "^1.12.12",

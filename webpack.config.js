@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var dotenv = require('dotenv');
 dotenv.load();
+require('es6-promise').polyfill();
 
 var metadata = {
     env: {}

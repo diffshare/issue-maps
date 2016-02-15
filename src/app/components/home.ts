@@ -25,6 +25,7 @@ export class Home {
             this.markers = result.issues;
         }, (error:any)=> {
             console.error(error);
+            RedmineService.clearAPIKey();
         })
     }
 }

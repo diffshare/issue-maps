@@ -8,7 +8,9 @@
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server": "webpack-dev-server --progress --profile --colors --display-error-details --display-cached --content-base src/",
     "start": "npm run server",
-    "test": "npm run build"
+    "test": "npm run build",
+    "pres3": "npm run build",
+    "s3": "node bin/deploy.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,7 @@
     "node-sass": "^3.4.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
+    "s3": "^4.4.0",
     "sass-loader": "^3.1.2",
     "slm": "git://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",

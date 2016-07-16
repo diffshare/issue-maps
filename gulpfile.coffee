@@ -5,8 +5,6 @@ del = require "del"
 fs = require "fs"
 packageJson = require "./package.json"
 
-tsd = require "gulp-tsd"
-
 #browserify = require "browserify"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"
@@ -32,10 +30,11 @@ gulp.task "build:coffee", ->
   .pipe $.coffee()
   .pipe gulp.dest("lib")
 
-gulp.task "build:tsd", (callback) ->
-  tsd {command: "reinstall", config: "./tsd.json"}, callback
+gulp.task "build:typings", ->
+  gulp.src "./typings.json"
+  .pipe $.typings()
 
-gulp.task "build:ts", ["build:tsd"], ->
+gulp.task "build:ts", ["build:typings"], ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
     target:"es6"

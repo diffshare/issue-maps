@@ -5,8 +5,6 @@ del = require "del"
 fs = require "fs"
 packageJson = require "./package.json"
 
-tsd = require "gulp-tsd"
-
 #browserify = require "browserify"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"
@@ -32,10 +30,11 @@ gulp.task "build:coffee", ->
   .pipe $.coffee()
   .pipe gulp.dest("lib")
 
-gulp.task "build:tsd", (callback) ->
-  tsd {command: "reinstall", config: "./tsd.json"}, callback
+gulp.task "build:typings", ->
+  gulp.src "./typings.json"
+  .pipe $.typings()
 
-gulp.task "build:ts", ["build:tsd"], ->
+gulp.task "build:ts", ["build:typings"], ->
   gulp.src "src/js/**/*.ts"
   .pipe $.typescript
     target:"es6"
@@ -118,9 +117,14 @@ gulp.task "test", [
 
 gulp.task "default", ["build"]
 
-gulp.task "clean", del.bind(null, ["lib/*", "public/*"])
+gulp.task "clean", del.bind(null, ["lib/*", "public/*", "public.zip"])
 
 gulp.task "s3", ["build"], ->
   aws = JSON.parse fs.readFileSync("aws.json")
   gulp.src "public/**"
   .pipe $.s3(aws)
+
+gulp.task "zip", ["build"], ->
+  gulp.src "public/**"
+  .pipe $.zip "public.zip"
+  .pipe gulp.dest "./"

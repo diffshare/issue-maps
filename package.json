@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/gulp test"
+    "test": "node_modules/.bin/gulp test",
+    "clean": "node_modules/.bin/gulp clean",
+    "zip": "node_modules/.bin/gulp zip"
   },
   "repository": {
     "type": "git",
@@ -13,15 +15,15 @@
   "author": "diffshare",
   "license": "MIT",
   "devDependencies": {
-    "gulp-bower": "0.0.13",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-runtime": "^6.3.19",
-    "browserify": "^11.0.0",
+    "browserify": "^13.0.0",
     "coffee-script": "^1.10.0",
     "del": "^2.0.2",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
+    "gulp-bower": "0.0.13",
     "gulp-coffee": "^2.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.2.0",
@@ -30,9 +32,10 @@
     "gulp-ruby-sass": "^2.0.6",
     "gulp-s3": "^0.3.0",
     "gulp-slim": "0.3.0",
-    "gulp-tsd": "0.0.4",
     "gulp-typescript": "^2.9.1",
-    "gulp-watchify": "git://github.com/marcello3d/gulp-watchify.git",
+    "gulp-typings": "^2.0.0",
+    "gulp-watchify": "0.6.0",
+    "gulp-zip": "^3.2.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   }

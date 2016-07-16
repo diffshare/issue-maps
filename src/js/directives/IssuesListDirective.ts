@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import IssueService from "../services/IssueService";
 export default class IssuesListDirective implements ng.IDirective {

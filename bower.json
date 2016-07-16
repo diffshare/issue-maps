@@ -21,5 +21,8 @@
     "angular-material": "~0.11.2",
     "angular-http-auth": "~1.2.2",
     "angular-material-icons": "~0.6.0"
+  },
+  "resolutions": {
+    "angular": "1.5.7"
   }
 }

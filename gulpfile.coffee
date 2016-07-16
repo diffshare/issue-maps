@@ -118,9 +118,14 @@ gulp.task "test", [
 
 gulp.task "default", ["build"]
 
-gulp.task "clean", del.bind(null, ["lib/*", "public/*"])
+gulp.task "clean", del.bind(null, ["lib/*", "public/*", "public.zip"])
 
 gulp.task "s3", ["build"], ->
   aws = JSON.parse fs.readFileSync("aws.json")
   gulp.src "public/**"
   .pipe $.s3(aws)
+
+gulp.task "zip", ["build"], ->
+  gulp.src "public/**"
+  .pipe $.zip "public.zip"
+  .pipe gulp.dest "./"

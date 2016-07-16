@@ -1,10 +1,23 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "0.12"
-  - "4.2.4"
-  - "5.3.0"
-  - node
+- "0.10"
+- "0.12"
+- "4.2.4"
+- "5.3.0"
+- node
 sudo: false
 before_install:
- - bundle install --path vendor/bundle
+- bundle install --path vendor/bundle
+before_deploy:
+- npm run zip
+deploy:
+  provider: releases
+  api_key:
+    secure: HXROxXf6Eym0tHAjH3UqBwyr0DAmdy6xGOtpRRG2HH8BLq/EifJu8K7HS15t11qK2oQ13rBCg8ADuItj+Mxjm/i4huzHC+PS2Jh76MEgZI2+WX82B3Q8nmoUduz4UDKd8nCJMhT4fZH5StP78k39JFNqHIjYXUOTzymkAb+gkL1qmuTFff1Rfw4iicK724AXsbPJqMZIrQ1kRxdAdRUjEoP5wfQPeVkm2Of4wh2GVoK/oIPDJ983VaYRMtkTK1fIub8BmDkDhf/jaZy4LxtkP67tK7F2zrVyzDkC5hbgHruS5sJS29i2guwrhA3sCrEO446Yg9X+US2RK0dAkNUHptkvfBk6zanEICeE/c7eBEvgKWOTrso3lUS51wTqTqgE722zWONfcC0wlBQSngeXLny+g/13kd5MNssR4g7HomChj/kG/YLaFERyfP2QjeINVWjL7i9Xi91WeM/DGi+SaylUv/ZOdT/5u/m4II0aNhFCnAKbIYDSstYL8Ea9KANhPWEP8qqOqvWvvgUq7grxSn62ViJt63WHds4CIFXxl9BhdzddSbJjciSyhUGo14/P6gWVVo+iVHjK5Oo4AjiDn2zH1LcALqyWKVc9G0BZfP21XhNhLc/MnjD8mzAOTjeYR2dHwe3ir4TOba2mjYF3zTPFNcSmdY882Al2lrUdIDg=
+  file: public.zip
+  all_branches: true
+  on:
+    tags: true
+    repo: diffshare/issue-maps
+after_script:
+- npm run clean

@@ -5,8 +5,6 @@ del = require "del"
 fs = require "fs"
 packageJson = require "./package.json"
 
-require "any-promise/register/bluebird"
-
 #browserify = require "browserify"
 #watchify = require "watchify"
 watchify = require "gulp-watchify"

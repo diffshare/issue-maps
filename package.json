@@ -48,6 +48,7 @@
     "node-sass": "^3.7.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
+    "s3": "^4.4.0",
     "sass-loader": "^3.1.2",
     "slm": "git://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",

@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="utf-8"
-    base href="/"
+    <script>document.write('<base href="' + document.location + '" />');</script>
   body
     app
       | Loading Angular2

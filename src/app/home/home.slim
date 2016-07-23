@@ -1,0 +1,24 @@
+div [hidden]="issues"
+  | Loading from Redmine
+
+form [hidden]="!issues"
+  input type="text" [(ngModel)]="keyword" placeholder="キーワード"
+
+br
+br
+
+table
+  tbody
+    tr *ngFor="let issue of issues | issueFilter:keyword"
+      td.c {{issue.id}}
+      td.c {{issue.category?.name}}
+      td.c {{issue.status.name}}
+      td {{issue.author.name}}
+      td {{issue.start_date}}
+      td {{issue.due_date}}
+      td {{issue.do_date}}
+      td {{issue.subject}}
+      /td
+        .t {{issue.description}}
+      /td
+        | {{issue | json}}

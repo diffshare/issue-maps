@@ -8,7 +8,7 @@ require('es6-promise').polyfill();
 var metadata = {
     env: {}
 };
-["REDMINE_ISSUE_URL", "REDMINE_API_KEY"].forEach(function(key) {
+["REDMINE_ISSUE_URL"].forEach(function(key) {
     metadata.env[key] = process.env[key];
 });
 
@@ -20,7 +20,8 @@ module.exports = {
         'main': './src/main.ts'
     },
 
-    devtool: 'source-map',
+    cache: true,
+    devtool: 'cheap-module-source-map',
     debug: true,
 
     output: {
@@ -56,13 +57,16 @@ module.exports = {
     plugins: [
         new ForkCheckerPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(true),
-        //new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor', 'polyfills']
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.slim',
             chunksSortMode: 'dependency'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(metadata.env)
         })
     ],
 

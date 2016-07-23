@@ -1,9 +1,10 @@
 {
-  "name": "angular2-webpack-slm-starter",
-  "version": "0.0.0",
-  "description": "A skeleton Angular 2 app built with Slm and Webpack.",
+  "name": "issue-maps",
+  "version": "2.0.0",
+  "description": "Redmine issue to maps",
   "scripts": {
-    "clean": "npm cache clean && rimraf node_modules dist",
+    "rimraf": "rimraf",
+    "clean": "npm cache clean && npm run rimraf node_modules dist",
     "watch": "webpack --watch --progress --profile --coloes --display-error-details --display-cached",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server": "webpack-dev-server --progress --profile --colors --display-error-details --display-cached --content-base src/",
@@ -14,32 +15,38 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diffshare/angular2-webpack-slm-starter.git"
+    "url": "git+https://github.com/diffshare/issue-maps.git"
   },
   "author": "diffshare",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/diffshare/angular2-webpack-slm-starter/issues"
+    "url": "https://github.com/diffshare/issue-maps/issues"
   },
-  "homepage": "https://github.com/diffshare/angular2-webpack-slm-starter#readme",
+  "homepage": "https://github.com/diffshare/issue-maps#readme",
   "dependencies": {
-    "angular2": "2.0.0-beta.2",
-    "angular2-google-maps": "^0.6.1",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
-    "zone.js": "0.5.10"
+    "@angular/common": "2.0.0-rc.4",
+    "@angular/compiler": "2.0.0-rc.4",
+    "@angular/core": "2.0.0-rc.4",
+    "@angular/http": "2.0.0-rc.4",
+    "@angular/platform-browser": "2.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.4",
+    "@angular/platform-server": "2.0.0-rc.4",
+    "@angular/router": "3.0.0-beta.2",
+    "angular2-google-maps": "^0.12.0",
+    "core-js": "^2.4.0",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^0.17.0",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.7.2",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.7.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
-    "s3": "^4.4.0",
     "sass-loader": "^3.1.2",
     "slm": "git://github.com/diffshare/slm.git",
     "slm-loader": "^0.1.1",
@@ -47,6 +54,7 @@
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
+    "typings": "^1.0.4",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1"
   }

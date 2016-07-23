@@ -9,6 +9,9 @@
   "exclude": [
     "node_modules"
   ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true
+  },
   "compileOnSave": false,
   "buildOnSave": false
 }

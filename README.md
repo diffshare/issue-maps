@@ -8,5 +8,5 @@ Angular2でGoogle Mapsを扱う。
 # Build
 ```
 $ npm install
-$ npm run build
+$ npm start
 ```

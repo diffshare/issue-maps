@@ -11,7 +11,8 @@
     "start": "npm run server",
     "test": "npm run build",
     "pres3": "npm run build",
-    "s3": "node bin/deploy.js"
+    "s3": "node bin/deploy.js",
+    "postinstall": "typings install"
   },
   "repository": {
     "type": "git",
